@@ -1,0 +1,128 @@
+*{
+	padding:0;
+	margin:0;
+	font-family:Georgia, "Microsoft YaHei", serif}
+a{
+	text-decoration: none;
+}
+body{
+	min-width: 1385px;
+}
+h1,h2,h4{
+	color:#FFF;
+	margin:10px 0;
+	}
+ul li{
+	list-style:none;}
+h1{
+	font-size:38.5px;
+	}
+#left{
+	float:left;
+	width:570px;}
+#left-nav{
+	float:left;
+	background-color:#333;
+	width:170px;
+	height:768px;
+	position:relative;}
+	
+.left ul li,a{
+	width:170px;
+	height:45px;
+	line-height:45px;
+	color:#CCC;
+	font-size:14px;
+	}
+#left-head ul li:hover {
+	color:white;
+	background-color:#E78170;}
+#left-head ul li:hover a{
+	color:white;
+	text-shadow: 2px 2px 3px black;/*设置文本阴影（x y 模糊 颜色）*/
+	}
+#left-foot ul li:hover{
+	color:#FFF;
+	font-weight: 700;
+	}
+
+#left-nav footer{
+	position:absolute;
+	left:0;
+	top:680px;}
+#left-rightImg{
+	width:400px;
+	height:768px;
+	float:right;}
+#left-rightImg img{
+	height:768px;
+	width:400px;
+	margin-bottom:-250px;
+    }
+#left-rightImg div{
+	margin-left:30px;
+	}
+#button{
+	text-decoration:none;
+	color:#FFF;
+	background-color:#49BE38;
+	display:inline-block;
+	padding:11px 19px 11px 34px;
+	width:96px;
+	height:20px;
+	line-height:20px;
+	border:1px solid #49BE38;
+	margin-top:10px;
+	}
+#right{
+	float:left;
+	position: relative;
+	width: 815px;
+	}
+#right header{
+	height: 50px;
+	padding-left: 25px;
+	/*padding :15px 15px  0 15px; */
+	border-bottom: 1px solid #B4B4B4;
+}
+
+#right header ul li {
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	
+	padding: 0 15px; 
+}
+.first-li{
+	border-bottom: 1px solid #000;
+}
+#right header ul li:hover{
+	background-color: #eee;
+	border-bottom: 1px solid #eee;
+
+}
+
+#right header input{
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin :15px 0 15px 15px; 
+	padding: 4px;
+	border-radius: 10px;/*边框变圆角*/
+	border:1px solid #B4B4B4;
+	/*background-color: black;*/
+}
+.table-list{
+	overflow: hidden;}
+.table-list li{
+	float: left;
+	margin: 10px 20px;
+	color: #595959;
+	padding: 5px;
+	border:1px solid #B4B4B4;
+	border-radius: 13px;
+}
+#list-box ul li:hover{
+	color: black;
+	text-shadow: 1px 1px 1px #707070;
+}
