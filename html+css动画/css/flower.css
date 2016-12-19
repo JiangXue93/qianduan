@@ -1,0 +1,146 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+
+	background-color: #8BE481;
+}
+.flower{
+	position: absolute;
+	top:300px;
+	left:150px;
+	width: 200px;
+	height: 200px;
+	background-color: rgba(242,141,141,0.7);
+	border-radius:200px 0px;
+	transform: rotate(45deg);
+	transform-origin:top right;
+	/*animation-fill-mode:forwards;*/
+
+	
+	
+}
+.flower:nth-child(2){
+	animation: show2 2s linear 0s ;
+	/*animation-fill-mode:forwards;*/
+}
+.flower:nth-child(3){
+	animation: show3 2s linear 0s ;
+	/*animation-fill-mode:forwards;*/
+}
+.flower:nth-child(4){
+	animation: show4 2s linear 0s ;
+	/*animation-fill-mode:forwards;*/
+}
+.flower:nth-child(5){
+	animation: show5 2s linear 0s ;
+	/*animation-fill-mode:forwards;*/
+}
+.flower:nth-child(6){
+	animation: show6 2s linear 0s ;
+	/*animation-fill-mode:forwards;*/
+}
+.flower:nth-child(7){
+	animation: show7 2s linear 0s ;
+	/*animation-fill-mode:forwards;*/
+}
+.flower:nth-child(8){
+	animation: show8 2s linear 0s ;
+	/*animation-fill-mode:forwards;*/
+}
+.flower:nth-child(9){
+	animation: show9 2s linear 0s ;
+	/*animation-fill-mode:forwards;*/
+}
+.flower:nth-child(10){
+	animation: show10 2s linear 0s ;
+	/*animation-fill-mode:forwards;*/
+}
+
+
+#flo .flower {
+	animation-fill-mode:forwards;
+}
+
+@keyframes show2{
+	0% {
+    	transform: rotate(45deg);
+  	}
+  	100% {
+    	transform: rotate(65deg);
+  	}
+}
+@keyframes show3{
+	0% {
+    	transform: rotate(45deg);
+  	}
+  	100% {
+    	transform: rotate(85deg);
+  	}
+}
+@keyframes show4{
+	0% {
+    	transform: rotate(45deg);
+  	}
+  	100% {
+    	transform: rotate(105deg);
+  	}
+}
+@keyframes show5{
+	0% {
+    	transform: rotate(45deg);
+  	}
+  	100% {
+    	transform: rotate(125deg);
+  	}
+}
+@keyframes show6{
+	0% {
+    	transform: rotate(45deg);
+  	}
+  	100% {
+    	transform: rotate(145deg);
+  	}
+}
+@keyframes show7{
+	0% {
+    	transform: rotate(45deg);
+  	}
+  	100% {
+    	transform: rotate(165deg);
+  	}
+}
+@keyframes show8{
+	0% {
+    	transform: rotate(45deg);
+  	}
+  	100% {
+    	transform: rotate(185deg);
+  	}
+}
+@keyframes show9{
+	0% {
+    	transform: rotate(45deg);
+  	}
+  	100% {
+    	transform: rotate(205deg);
+  	}
+}
+@keyframes show10{
+	0% {
+    	transform: rotate(45deg);
+  	}
+  	100% {
+    	transform: rotate(225deg);
+  	}
+}
+@keyframes show11{
+	0% {
+    	transform: rotate(45deg);
+  	}
+  	100% {
+    	transform: rotate(245deg);
+  	}
+}
+
