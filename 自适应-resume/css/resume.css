@@ -1,0 +1,173 @@
+*{
+	padding: 0;
+	margin:0; 
+	font-family:  "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+}
+p{
+	color: white;
+}
+html{
+	font-size: 1vw;
+}
+/*@media screen and (min-width: 50em) {
+    html {
+        font-size: 2vw;
+    }
+}*/
+@media screen and (min-width: 50em) {
+    html {
+        font-size: 0.5em;
+    }
+}
+#info{
+	width: 80%;
+	/*height: 1300px;*/
+	margin: 0 auto;
+	background-color: #D9D9D4;
+	/*overflow: hidden;*/
+	display: flex;
+
+}
+#simpleinfo{
+	flex: 7;
+	float: left;
+	/*width: 35%;*/
+	background-color: rgb(55,164,220);
+}
+#details{
+	flex: 13;
+	float: right;
+	/*width: 65%;*/
+
+}
+#photo{
+	width: 100%;
+	margin-bottom: -10em;
+	border-right: 1px solid #C7C7C7;
+}
+
+h1{
+	text-align: center;
+	color: #FFFFFF;
+	font-weight: 900;
+	font-family:  "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+	font-size: 4em;
+} 
+h2{
+	color: #FFFFFF;
+	text-align: center;
+	margin-bottom: 3.8em;
+	font-size: 2.2em;
+
+}
+h6{
+	font-size: 2em;
+	margin: 0 0 2em 0 ;
+
+}
+.sim-body-box{
+	height: 15em;
+}
+.sim-body{
+	position: relative;
+	vertical-align:middle;   
+}
+.sim-body div{
+	height: 10em;
+	width: 60%;
+	position: absolute;
+	left:40%;
+	top: 4em;
+	border-bottom: 1.5px solid rgb(28,136,200);
+}
+.title{
+	font-size: 2em;
+	margin-bottom: 0.6em;
+}
+#skill-box{
+	height:30em;
+}
+#skill-box div{
+	height:30em;
+}
+#skill-box div div{
+	top: 10%;
+	height: 90%;
+	border-bottom:  none; 
+}
+input{
+	background: #3071a9;
+}
+
+footer{
+	
+	height: 6em;
+	/*margin: 0 auto;*/
+	background-color: #FFF;
+}
+a{
+	text-decoration: none;
+	line-height: 6em;
+	display: block;
+	text-align:center;
+	color: #37A4DC;
+	font-weight: 700;
+}
+footer a::before{
+	content: "[GitHub]";
+}
+.detail-box{
+	/*width: 95%;*/
+	/*height: 60px;*/
+	margin: 3em 3em;
+	background-color: #FAFAFA;
+	position: relative;
+	overflow: hidden;
+	border-top: 1px solid #C7C7C7;
+	border-right: 3px solid #C7C7C7;
+	border-bottom: 3px solid #C7C7C7;
+	border-left: 1px solid #C7C7C7;
+
+}
+.detail-box p,dd,dt{
+	color: #727272;
+}
+.detail-box p{
+	margin:1em 4em 1em 0; 
+}
+.detail-box img{
+	/*width: 8em;*/
+	/*height: 15em;*/
+}
+dt{
+	font-size: 3em;
+	position: absolute;
+	left: 80px;
+	top: 43px;
+}
+dd{
+	/*margin-left: 80px;*/
+	margin: 0 0 4em 8em;
+	/*position: relative;
+}
+ul{
+	height: 6em;
+	/*padding-left: 80px;*/
+}
+ul li{
+	list-style-type: none;
+	float: left;
+
+}
+ul li img{
+	width: 6em;
+	height:6em;
+	margin:0 4.5em 2em 0;
+}
+time{
+	color: #37A4DC;
+	font-weight: 900;
+}
+
+
+
