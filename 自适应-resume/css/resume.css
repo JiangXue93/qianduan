@@ -8,16 +8,7 @@ p{
 }
 html{
 	font-size: 1vw;
-}
-/*@media screen and (min-width: 50em) {
-    html {
-        font-size: 2vw;
-    }
-}*/
-@media screen and (min-width: 50em) {
-    html {
-        font-size: 0.5em;
-    }
+	min-width: 550px;
 }
 #info{
 	width: 80%;
@@ -42,53 +33,75 @@ html{
 }
 #photo{
 	width: 100%;
-	margin-bottom: -10em;
+	
+	/*margin-bottom: -12em;*/
 	border-right: 1px solid #C7C7C7;
 }
-
+#sim-head{
+	position: relative;
+}
 h1{
 	text-align: center;
+	display: inline-block;
+	width: 100%;
 	color: #FFFFFF;
 	font-weight: 900;
 	font-family:  "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
-	font-size: 4em;
+	font-size: 5rem;
+	position: absolute;
+	bottom: 4rem;
+	left: 0;
+	/*line-height: 5em;*/
 } 
 h2{
 	color: #FFFFFF;
 	text-align: center;
-	margin-bottom: 3.8em;
-	font-size: 2.2em;
+	display: inline-block;
+	width: 100%;
+	/*margin-bottom: 0.5em;*/
+	font-size: 3rem;
+	position: absolute;
+	bottom: 1rem;
+	left: 0;
 
 }
 h6{
-	font-size: 2em;
-	margin: 0 0 2em 0 ;
+	font-size: 2rem;
+	margin: 0 0 20px 0 ;
 
 }
 .sim-body-box{
-	height: 15em;
+	height: 150px;
 }
 .sim-body{
 	position: relative;
+	/*display: table;*/
 	vertical-align:middle;   
 }
+.sim-body img{
+	width: 30%;
+	/*display: table-cell;*/
+	/*padding: 28px 0;*/
+}
 .sim-body div{
-	height: 10em;
+	padding: 50px 0;
+	/*display: table-cell;*/
+	/*height: 150px;*/
 	width: 60%;
 	position: absolute;
 	left:40%;
-	top: 4em;
+	top: 0;
 	border-bottom: 1.5px solid rgb(28,136,200);
 }
 .title{
-	font-size: 2em;
-	margin-bottom: 0.6em;
+	font-size: 2rem;
+	margin-bottom: 6px;
 }
 #skill-box{
-	height:30em;
+	height:300px;
 }
 #skill-box div{
-	height:30em;
+	height:300px;
 }
 #skill-box div div{
 	top: 10%;
@@ -96,18 +109,19 @@ h6{
 	border-bottom:  none; 
 }
 input{
+	width: 60%;
 	background: #3071a9;
 }
 
 footer{
 	
-	height: 6em;
+	height: 60px;
 	/*margin: 0 auto;*/
 	background-color: #FFF;
 }
 a{
 	text-decoration: none;
-	line-height: 6em;
+	line-height: 60px;
 	display: block;
 	text-align:center;
 	color: #37A4DC;
@@ -119,7 +133,7 @@ footer a::before{
 .detail-box{
 	/*width: 95%;*/
 	/*height: 60px;*/
-	margin: 3em 3em;
+	margin: 30px 30px;
 	background-color: #FAFAFA;
 	position: relative;
 	overflow: hidden;
@@ -133,25 +147,21 @@ footer a::before{
 	color: #727272;
 }
 .detail-box p{
-	margin:1em 4em 1em 0; 
-}
-.detail-box img{
-	/*width: 8em;*/
-	/*height: 15em;*/
+	margin:10px 40px 10px 0; 
 }
 dt{
-	font-size: 3em;
+	font-size: 2.5rem;
 	position: absolute;
 	left: 80px;
 	top: 43px;
 }
 dd{
 	/*margin-left: 80px;*/
-	margin: 0 0 4em 8em;
-	/*position: relative;
+	margin: 0px 0 40px 80px;
+	/*position: relative;*/
 }
 ul{
-	height: 6em;
+	height: 60px;
 	/*padding-left: 80px;*/
 }
 ul li{
@@ -160,9 +170,9 @@ ul li{
 
 }
 ul li img{
-	width: 6em;
-	height:6em;
-	margin:0 4.5em 2em 0;
+	width: 60px;
+	height:60px;
+	margin:0 45px 20px 0;
 }
 time{
 	color: #37A4DC;
