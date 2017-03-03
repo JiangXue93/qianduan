@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试冒泡</title>
+<style type="text/css">
+#a{
+	width: 250px;
+	height: 100px;
+	background-color:blue;
+}
+#b{
+	width: 200px;
+	height: 60px;
+	background-color:green;
+}
+#c{
+	width: 150px;
+	height: 30px;
+	background-color:gray;
+}
+</style>
+</head>
+<body>
+<div id="a">a
+	<div id="b">b
+		<div id="c">c
+		</div>
+	</div>
+</div>
+	
+</body>
+<script type="text/javascript">
+	var a = document.getElementById("a");
+	var b = document.getElementById("b");
+	var c = document.getElementById("c");
+
+	// b.addEventListener('click',function(event){
+	// 	console.log("b-in");
+	// 	//event.stopPropagation();
+	// },true);//true 捕获阶段执行   false 冒泡阶段执行(默认)
+	
+	// b.addEventListener('click',function(event){
+	// 	console.log("b-out");
+	// 	//event.stopPropagation();
+	// },false);
+
+	// c.addEventListener('click',function(event){
+	// 	console.log("c-in");
+	// 	//event.stopPropagation();
+	// },true);
+	// c.addEventListener('click',function(event){
+	// 	console.log("c-out");
+	// 	//event.stopPropagation();
+	// },false);
+//////////////////////////////////////////////////////////////
+	function testFun() {
+		console.log("aaa");
+	}
+
+	b.addEventListener('click', testFun);
+
+	c.addEventListener('click',function(event){
+		console.log("c-in");
+		//event.stopPropagation();
+	});
+</script>
+</html>
