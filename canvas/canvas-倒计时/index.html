@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+</head>
+<body>
+<canvas id="canvas" width="1024" height="568" style="border:1px solid #ccc;display: block;margin: 0 auto;">当前浏览器不支持。。。canvas</canvas>
+<script type="text/javascript">
+window.onload = function(){
+	var canvas = document.getElementById('canvas');
+	canvas.width = 1024;
+	canvas.height = 568;
+	var context = canvas.getContext('2d');//获取canvas上下文环境
+
+	if(canvas.getContext('2d')){
+		context.beginPath();
+		context.moveTo(100,100);//状态设置
+		context.lineTo(500,500);//状态设置
+		context.lineTo(500,100);
+		context.lineTo(100,100);
+		context.closePath();
+
+		context.lineWidth = 5;
+		//context.fillStyle = "rgba(2,100,30)";//填充颜色
+		//context.fill();
+		context.strokeStyle = "red";//绘制颜色
+		context.stroke();//笔画绘制
+
+		context.beginPath();
+		context.moveTo(200,100);//状态设置
+		context.lineTo(300,300);//状态设置
+		
+		context.closePath();
+
+		context.strokeStyle = "black";
+		context.stroke();
+
+		
+
+		context.beginPath();
+		context.arc(300 , 300 , 200 , 0 , 1.5*Math.PI,false);//绘制弧线 ture逆时针 false顺时针
+		//context.closePath();//去除可让当前路径不封闭
+
+		context.strokeStyle = "blue";
+		context.stroke();
+
+
+
+	}else{
+		alert('当前浏览器不支持。。。canvas');
+	}
+
+}
+	
+</script>
+</body>
+</html>

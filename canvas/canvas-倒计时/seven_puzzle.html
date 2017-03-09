@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>七巧板</title>
+	<style type="text/css">
+		#canvas{
+			display: block;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<script type="text/javascript">
+	var puzzle = [
+	{p:[{x:0,y:0},{x:800,y:0},{x:400,y:400}],color:"#cafd67"},
+	{p:[{x:0,y:0},{x:400,y:400},{x:0,y:800}],color:"#aa33ff"},
+	{p:[{x:800,y:0},{x:800,y:400},{x:600,y:600},{x:600,y:200}],color:"#6ccdf7"},
+	{p:[{x:600,y:200},{x:400,y:400},{x:600,y:600}],color:"#666c67"},
+	{p:[{x:400,y:400},{x:600,y:600},{x:400,y:800},{x:200,y:600}],color:"#c67"},
+	{p:[{x:200,y:600},{x:400,y:800},{x:0,y:800}],color:"#ca7"},
+	{p:[{x:800,y:400},{x:800,y:800},{x:400,y:800}],color:"#336"}
+	];
+
+	window.onload = function(){
+		var canvas =document.getElementById('canvas');
+		canvas.width = 800;
+		canvas.height = 800;
+
+		var context = canvas.getContext('2d');
+		for(var i = 0 ; i < puzzle.length ; i++){
+			draw(puzzle[i],context);
+		}
+	};
+
+	function draw(piece,ctx){
+
+		ctx.beginPath();
+		ctx.moveTo(piece.p[0].x, piece.p[0].y);
+		for(var i = 1 ; i < piece.p.length ; i++){
+			ctx.lineTo(piece.p[i].x, piece.p[i].y);
+		}
+		ctx.closePath();
+
+		ctx.fillStyle = piece.color;
+		ctx.fill();
+	}
+
+</script>
+	
+</body>
+</html>
