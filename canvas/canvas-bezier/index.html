@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>mouse</title>
+</head>
+<style type="text/css">
+*{
+	margin: 0;
+	padding: 0;
+}
+html body{
+	height: 100%;
+	width: 100%;
+}
+#canvas{
+    width: 500px;
+    height: 500px;
+    background-color: #D0D0D0;
+    display: inline-block;
+}
+#content{
+	width: 400px;height: 400px;
+	border: 50px solid #314F9B;
+	display: inline-block;
+	background-color: #778ECD;
+	position: relative;
+	
+}
+#floor{
+	width: 400px;
+	height: 30%;
+	background-color: #2E4046;
+	position: absolute;
+	top: 70%;
+}
+#car{
+	width: 100px;
+	height: 100px;
+	background-color: #DEADF7;
+	position: absolute;
+	top:230px;
+	left: 10px;
+	//animation: mymove 3s infinite;
+	//animation: mymove 4s cubic-bezier(0.978, 0.166, 0.28, 0.552);
+}
+.pause{
+   animation-play-state:paused;
+   -webkit-animation-play-state:paused; /* Safari 和 Chrome */
+}
+
+.run{
+	animation-play-state: running;
+	-webkit-animation-play-state:running; /* Safari 和 Chrome */
+}
+
+@keyframes mymove
+{
+	from {left:10px;}
+	to {left:290px;}
+}
+</style>
+<body>
+<canvas id="canvas">
+	您的浏览器不支持canvas!
+</canvas>
+<div id="content">
+	<div id="car"></div>
+	<div id="floor"></div>
+</div>
+<script type="text/javascript" src="bezier.js"></script>
+</body>
+</html>
