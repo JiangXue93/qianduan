@@ -57,7 +57,7 @@ window.onload = function(){
 
 					update();//更新画图
 					car.style = " ";
-					//car.className="pause";
+					car.className="pause";
 
 
 				}
