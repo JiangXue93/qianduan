@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SetBackColor</title>
+</head>
+<body onload="colorload()">
+<script type="text/javascript">
+	if(typeof localStorage === 'undefined'){alert("NOT");}
+	else{
+		console.log("YES");
+	}
+	var storage = localStorage;
+
+	function setRed(){
+		var value = "red";
+		document.getElementById("divBlock").style.backgroundColor = value;
+		window.localStorage.setItem("Div",value);
+	}
+	function setGreen(){
+		var value = "green";
+		document.getElementById("divBlock").style.backgroundColor = value;
+		window.localStorage.setItem("Div",value);
+	}
+	function setBlue(){
+		var value = "blue";
+		document.getElementById("divBlock").style.backgroundColor = value;
+		window.localStorage.setItem("Div",value);
+	}
+	function colorload(){
+		document.getElementById("divBlock").style.backgroundColor = window.localStorage.getItem("Div");
+	}
+</script>
+<section id="main">
+<button id="redbtn" onclick="setRed()">RED</button>
+<button id="greenbtn" onclick="setGreen()">green</button>
+<button id="bluebtn" onclick="setBlue()">blue</button>
+<div id="divBlock" style="width: 500px;height: 500px;border: 1px solid black"></div>
+</section>
+</body>
+</html>
