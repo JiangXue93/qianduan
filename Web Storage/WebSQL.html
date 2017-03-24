@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>WebSQL TEST</title>
+</head>
+<body>
+	<div id="status"></div>
+
+<script type="text/javascript">
+var info = document.getElementById('status');
+var msg ;
+//创建数据库
+var db = openDatabase('MyFirstDatabase','1.1','my first database!',1024*2);
+if(!!db){
+	// db.transaction(function(tx){
+	// 	tx.executeSql('CREATE TABLE IF NOT EXISTS t1 (id unique,log)');
+	// 	tx.executeSql('INSERT INTO t1 (id,log) VALUES (1,"JX")');
+	// 	tx.executeSql('INSERT INTO t1 (id,log) VALUES (2,"super star")');
+	 	
+
+	// });
+
+	insertData(4,"lalala!!!!");
+	getData();
+	//deleteTable();
+
+	
+}else{
+	info.innerHTML = '<p>faild to create DB</p>';
+}
+//数据库插入字段
+function insertData(id,log){
+		db.transaction(function(tx){
+			tx.executeSql('INSERT INTO t1 (id,log) VALUES (?,?)',[id,log]);
+			info.innerHTML = '<p>insert succuss</p>';
+		});
+	}
+
+//读取信息
+function getData(){
+	db.transaction(function(tx){
+	tx.executeSql('SELECT * FROM t1',[],function(tx,results){
+		var len = results.rows.length,
+				i;
+		msg = '<p>查询行数：'+len+'</p>';
+		info.innerHTML  += msg;
+		for(i = 0 ; i < len ; i++){
+			msg = '<p>id 数据：'+results.rows[i].id+' '+ results.rows[i].log+'</p>';
+			info.innerHTML  += msg;
+		} 		
+	},null);
+	});
+}
+//删除数据库表
+function deleteTable(){
+	db.transaction(function(tx){
+		tx.executeSql('DROP TABLE t1');
+	});
+}
+</script>
+</body>
+</html>
