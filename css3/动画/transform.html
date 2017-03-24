@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>transform</title>
+<style type="text/css">
+div{
+	position: absolute;
+	left: 100px;
+	top:100px;
+	width: 306px;
+	height:226px;
+
+	background: #ff0;
+	/*动画过程*/
+	transition:  transform .5s ease-in,background .5s ease-in;
+}
+div:hover{
+	//transform: skew(0deg,89deg);
+	transform: matrix(1,0.4,0,1,0,0);
+	//transform: rotate(180deg) scale(2);
+	background: #0f0;
+}
+</style>
+</head>
+<body>
+<div>123</div>
+
+</body>
+</html>
