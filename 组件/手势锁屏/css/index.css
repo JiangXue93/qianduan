@@ -2,19 +2,161 @@
 	padding: 0;
 	margin: 0;
 
+
+}
+html,body{
+	min-width: 400px;
+	font-size: 16px;
 }
 #wrap{
-	width: 330px;
-	//margin: 0 auto;
-	background-color: #ccc;
+	position: relative;
+	width: 400px;
+	margin: 0 auto;
+	background-color: #F6F4F4;
 }
-label{
+
+#head-bar__signal{
+	margin: 5px 0;
+	margin-left: 3px;
+	float:left;
+	height: 18px;
+}
+#head-bar__signal span{
+	float: left;
+
+	margin: 5px 1px;
+	width: 8px;
+	height: 8px;
+	border-radius: 4px;
+	background: black;
+	box-sizing: content-box;
+
+}
+#head-bar__company{
+	margin: 3px 0;
+	font-size: 17px;
+	float:left;
+	
+}
+#head-bar__time{
+
+	width: 56px;
+	margin: 0 auto;
+	padding: 5px 0;
+}
+#head-bar__battary{
+	margin: 8px 10px;
+	float:right;
+	left:0;
+	width: 20px;
+	height: 8px;
+	border: 2px solid black;
+	border-radius: 3px;
+}
+#head-bar__battary:before{
+	content: " ";
 	display: block;
-
+	/*position: absolute;
+	top:0;
+	left: 0;*/
+	margin: 1px 1px;
+	//width: 16px;
+	height: 6px;
+	background-color: black;
+	//border: 1px solid black;
+	border-radius: 2px;
+	animation: charge 2s ease-in-out infinite;
+	//animation: charge-col 1s ease-in infinite;
+}
+#head-bar__battary:after{
+	content: " ";
+	display: block;
+	position: relative;
+	top: -7px;
+	right: -23px;
+	width: 2px;
+	height: 6px;
+	background-color: black;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
 
 }
+
+@keyframes charge{
+	0%{
+		width: 0px;
+		background-color:#F80F27;
+	}
+
+	
+	
+	100%{
+		width: 19px;
+		background-color:#05FF05;
+	}
+
+}
+
+#title{
+	display: block;
+	font-size: 1.5rem;
+	border-bottom: 1.5px solid #ABAAAA;
+}
+#title span{
+	width: 96px;
+	display: block;
+	margin: 10px auto;
+	font-size: 1.5rem;
+}
+/*#head-bar__company::before{
+	content:"";
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background:black;
+}*/
 #myCanvas{
 	/*width: 300;
 	height: 300;*/
-	border: 1px solid red;
+	margin: 0 50px;
+	/border: 1px solid red;
+}
+#control{
+	padding:0 50px; 
+}
+#lable-box{
+	text-align: center;
+}
+label:nth-child(2){
+	margin-left: 15px; 
+	
+
+
+}
+#reset{
+	display: block;
+	width: 190px;
+	height: 30px;
+	margin:10px auto;
+	/background-color: #F6F6F6;
+	background:linear-gradient(to bottom,#FCFBFB 0%,#C4C4C4 50%,#ECEBEB 100%);
+	border:1px solid #CCC;
+	border-radius: 10px;
+	//box-shadow: 1px 2px 2px #888888;
+
+}
+#reset:focus{
+	outline: none;
+}
+#reset:active{
+	background:linear-gradient(to bottom,#FCFBFB 0%,#C4D7FC 50%,#ECEBEB 100%);
+	/background-color: #C3C2C2;
+	//color: white;
+}
+
+#forFun img{
+	width: 400px;
+}
+#show{
+	height: 95px;
 }

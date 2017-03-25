@@ -3,6 +3,8 @@ const HEIGHT = 300;
 var btns = [];
 var pass = [];
 var input = 0;
+var oldTime,nowTime;
+var dayPart;
 
 var processPass = 0;//0为设置密码阶段，1为验证密码阶段
 
@@ -10,7 +12,14 @@ var  set = document.getElementById('set');
 var confirm = document.getElementById('confirm');
 var show = document.getElementById('show');
 var reset = document.getElementById('reset');
+var wrap = document.getElementById('wrap');
+var img = document.getElementsByTagName('img')[0];
+var time = document.getElementById('time');
+var dayTime = document.getElementById('dayTime');
 
+var offsetX,offsetY;
+
+window.onresize= function(){ location=location }; 
 window.onload = function(){
 
 	//console.log(getPass());
@@ -18,14 +27,27 @@ window.onload = function(){
 	//console.log(getPass());
 	//clearPass();
 
-	reset.addEventListener('click',function(){
+	oldTime = getTime();
+	console.log(oldTime);
+	time.innerHTML = oldTime;
+	dayTime.innerHTML = dayPart;
+
+	setInterval(function(){
+		nowTime = getTime();
+		if(nowTime != oldTime){
+			time.innerHTML = nowTime;
+			oldTime = nowTime;
+		}
+	}, 1000);
+
+	reset.addEventListener('click',function(){//重置密码
 		clearPass();
 		show.innerHTML = "密码清零成功,输入新密码！";
 		set.checked = 'true';
 		processPass = 0;
 	});
 
-	set.addEventListener('click',function(){
+	set.addEventListener('click',function(){//输入密码，已有密码情况下，需先验证密码，再做修改
 		processPass = 0;
 		show.innerHTML='进入设置密码模式！';
 	});
@@ -37,6 +59,10 @@ window.onload = function(){
 	var canvas = document.getElementById('myCanvas');
 	var radius = countRad(WIDTH);
 	console.log("按钮半径:"+radius);
+	offsetX = canvas.offsetLeft + wrap.offsetLeft;
+	console.log(offsetX);
+	offsetY = canvas.offsetTop;
+
 
 	canvas.width = WIDTH;
 	canvas.height = HEIGHT;
@@ -44,13 +70,13 @@ window.onload = function(){
 	
 	getBtns(WIDTH,HEIGHT);
 
-	drawBtns("#5CDE5C",15);
+	drawBtns("#ccc",3);
 
 
 	canvas.onmousedown = function(event){
 		var e = event || window.event;
-		var x = e.clientX;
-        var y =e.clientY;
+		var x = e.clientX - offsetX;
+        var y =e.clientY - offsetY;
 
         for(var i=0,len = btns.length ;i<len;i++){
 
@@ -67,20 +93,22 @@ window.onload = function(){
 
 	};
 	canvas.onmousemove = function(event){
+		img.setAttribute('src','img/2.png');
 		var e = event || window.event;
-		var x = e.clientX;
-		var y =e.clientY;
+		var x = e.clientX - offsetX;
+		var y =e.clientY - offsetY;
+		//console.log(x+" "+y);
 		if(input > 0){
 			ctx.clearRect(0, 0, WIDTH, HEIGHT);
-			drawBtns("#5CDE5C",15);
+			drawBtns("#ccc",3);
 
 			var lastBtn = getBtn(pass[input-1]);
 			var lastX = lastBtn.x;
 			var lastY = lastBtn.y;
 
-			ctx.strokeStyle = 'black';
+			ctx.strokeStyle = 'rgba(2,44,233,1)';
 			ctx.lineWidth = "5";
-
+			ctx.lineCap="round";
 			ctx.beginPath();
 			ctx.moveTo(lastX, lastY);
 			ctx.lineTo(x, y);
@@ -106,6 +134,7 @@ window.onload = function(){
 		}
 	};
 	canvas.onmouseup = function(){
+
 		if(input>=4){
 
 			console.log("Password is:");
@@ -149,35 +178,41 @@ window.onload = function(){
 			}
 			//画背景
 			ctx.clearRect(0, 0, WIDTH, HEIGHT);
-			drawBtns("#5CDE5C",15);
+			initBtns();
+			drawBtns("#ccc",3);
 			
 			//清空状态
 			pass = [];
 			input = 0;
-			initBtns();
+			
 			console.log(password);
 		}else if(input > 0){
 			//画背景
 			ctx.clearRect(0, 0, WIDTH, HEIGHT);
-			drawBtns("#5CDE5C",15);
+			initBtns();
+			drawBtns("#ccc",3);
 			
 			//清空状态
 			pass = [];
 			input = 0;
-			initBtns();
+			
 			show.innerHTML="输入密码小于4位！";
 
 		}
-		
 
+
+	};
+	canvas.onmouseout = function(){
+		img.setAttribute('src','img/1.png');
 	};
 	function drawLine(){
 		if(input >= 2){
 			var fistBtn = getBtn(pass[0]);
 			var firstX = fistBtn.x;
 			var firstY = fistBtn.y;
-			ctx.strokeStyle = 'black';
+			ctx.strokeStyle = 'rgba(2,44,233,1)';
 			ctx.lineWidth = "5";
+			ctx.lineJoin="round"; 
 			ctx.moveTo(firstX,firstY);
 
 			for(var i = 1 ,len = input ; i < len ; i++){
@@ -207,22 +242,39 @@ window.onload = function(){
 			return;
 		}
 	}
+
 	//画出按钮
 	function drawBtns(color,lineWidth){
 		if(!! btns){
 			for(var i=0,len = btns.length ;i<len;i++){
 
 				ctx.strokeStyle = color;
+				ctx.fillStyle = "#F8F2F2";
 				ctx.lineWidth = lineWidth;
 
 				ctx.beginPath();
 				ctx.arc(btns[i].x, btns[i].y, radius, 0, 2*Math.PI);
 				ctx.closePath();
+				ctx.fill();
 				ctx.stroke();
+
+				if(!btns[i].active){
+					ctx.strokeStyle = "#555FCB";
+					ctx.fillStyle = "rgba(2,44,233,0)";
+					ctx.lineWidth = 3;
+
+					ctx.beginPath();
+					ctx.arc(btns[i].x, btns[i].y, radius/3, 0, 2*Math.PI);
+					ctx.closePath();
+					ctx.fill();
+					ctx.stroke();
+
+				}
 			}
 		}
 		
 	}
+	//清楚按钮状态
 	function initBtns(){
 		if(!! btns){
 			for(var i=0,len = btns.length ;i<len;i++){
@@ -288,6 +340,32 @@ window.onload = function(){
 	function clearPass(){
 		var db = getLocalStorage();
 		db.removeItem('password');
+
+	}
+	//获取系统时间
+	function getTime(){
+
+		var oDate = new Date(); //实例一个时间对象；
+		var hour = 	oDate.getHours();
+		var minute = oDate.getMinutes();
+		//单数字前面加“0”
+		if(minute.toString().length==1){
+			minute = "0"+minute.toString();
+		}
+		if(hour.toString().length==1){
+			hour = "0"+hour.toString();
+		}
+
+
+		if(hour >= 12 && dayPart != "PM" ){
+			dayPart = "PM";
+			dayTime.innerHTML = dayPart;
+
+		}else if(hour < 12 && dayPart != "AM" ){
+			dayPart = "AM";
+			dayTime.innerHTML = dayPart;
+		}
+		return hour+":"+minute;
 
 	}
 };

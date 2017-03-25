@@ -7,14 +7,37 @@
 </head>
 <body>
 <div id="wrap">
-	
+	<header>
+		<div id="head-bar">
+			<div id="head-bar__signal">
+				<span></span><span></span><span></span><span></span><span></span>
+			</div>
+			<div id="head-bar__company">中国移动</div>
+			<div id="head-bar__battary"></div>
+			<div id="head-bar__time"><span id="time"></span><span id="dayTime"></span></div>
+			
+		</div>
+		<div id="title">
+			<span>手势密码</span>
+		</div>
+	</header>
 
 	<canvas id="myCanvas" width="300" height="300">您的设备不支持canvas_(:зゝ∠)_请使用最新版浏览器，或者更换浏览器！</canvas>
 
-	<label for="set"><input type="radio" name="choose" class="choose" id="set">设置密码</label>
-	<label for="confirm"><input type="radio" name="choose" class="choose" id="confirm">验证密码</label>
-	<button id="reset">重置密码</button>
-	<div id="show"></div>
+	<div id="control">
+		<div id="lable-box">
+			<label for="set"><input type="radio" name="choose" class="choose" id="set">设置密码</label>
+			<label for="confirm"><input type="radio" name="choose" class="choose" id="confirm">验证密码</label>
+		</div>
+		
+		<button id="reset">重置密码</button>
+		<div id="show"> </div>
+	</div>
+	<div id="forFun">
+		<img src="img/1.png">
+	</div>
+	
+	
 </div>
 <script type="text/javascript" src="js/index.js"></script>
 </body>
