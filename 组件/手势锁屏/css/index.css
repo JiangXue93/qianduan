@@ -66,6 +66,9 @@ html,body{
 	//border: 1px solid black;
 	border-radius: 2px;
 	animation: charge 2s ease-in-out infinite;
+	-webkit-animation:charge 2s ease-in-out infinite;/* Safari 和 Chrome */
+	-moz-animation: charge 2s ease-in-out infinite;	/* Firefox */
+	-o-animation: charge 2s ease-in-out infinite;/* Opera */
 	//animation: charge-col 1s ease-in infinite;
 }
 #head-bar__battary:after{
@@ -86,10 +89,40 @@ html,body{
 	0%{
 		width: 0px;
 		background-color:#F80F27;
+	}	
+	100%{
+		width: 19px;
+		background-color:#05FF05;
 	}
 
-	
-	
+}
+@-moz-keyframes charge{
+	0%{
+		width: 0px;
+		background-color:#F80F27;
+	}	
+	100%{
+		width: 19px;
+		background-color:#05FF05;
+	}
+
+}
+@-webkit-keyframes charge{
+	0%{
+		width: 0px;
+		background-color:#F80F27;
+	}	
+	100%{
+		width: 19px;
+		background-color:#05FF05;
+	}
+
+}
+@-o-keyframes charge{
+	0%{
+		width: 0px;
+		background-color:#F80F27;
+	}	
 	100%{
 		width: 19px;
 		background-color:#05FF05;
@@ -100,13 +133,15 @@ html,body{
 #title{
 	display: block;
 	font-size: 1.5rem;
-	border-bottom: 1.5px solid #ABAAAA;
+	border-bottom: 1.6px solid #ABAAAA;
 }
-#title span{
-	width: 96px;
-	display: block;
-	margin: 10px auto;
-	font-size: 1.5rem;
+#title {
+	//width: 4em;
+	//display: block;
+	padding: 10px 0;
+	//padding: 20px 10px;
+	font-size: 24px;
+	text-align: center;
 }
 /*#head-bar__company::before{
 	content:"";
@@ -129,6 +164,7 @@ html,body{
 }
 label:nth-child(2){
 	margin-left: 15px; 
+	line-height: 50px;
 	
 
 
@@ -148,6 +184,9 @@ label:nth-child(2){
 #reset:focus{
 	outline: none;
 }
+#reset:hover,label:hover{
+	cursor: pointer;
+}
 #reset:active{
 	background:linear-gradient(to bottom,#FCFBFB 0%,#C4D7FC 50%,#ECEBEB 100%);
 	/background-color: #C3C2C2;
@@ -158,5 +197,5 @@ label:nth-child(2){
 	width: 400px;
 }
 #show{
-	height: 95px;
+	height: 50px;
 }

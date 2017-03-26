@@ -28,7 +28,7 @@ window.onload = function(){
 	//clearPass();
 
 	oldTime = getTime();
-	console.log(oldTime);
+	//console.log(oldTime);
 	time.innerHTML = oldTime;
 	dayTime.innerHTML = dayPart;
 
@@ -78,6 +78,7 @@ window.onload = function(){
 		var x = e.clientX - offsetX;
         var y =e.clientY - offsetY;
 
+        canvas.style.cursor = "pointer";
         for(var i=0,len = btns.length ;i<len;i++){
 
 			if(Math.pow(x-btns[i].x,2)+Math.pow(y-btns[i].y,2) <= Math.pow(radius,2)){
@@ -86,17 +87,13 @@ window.onload = function(){
 			   input++;
 			}
 		}
-        if(ctx.isPointInPath(x, y)){
-        	console.log(x+" "+y);
-        }
 		
-
 	};
 	canvas.onmousemove = function(event){
 		img.setAttribute('src','img/2.png');
 		var e = event || window.event;
 		var x = e.clientX - offsetX;
-		var y =e.clientY - offsetY;
+		var y = e.clientY - offsetY;
 		//console.log(x+" "+y);
 		if(input > 0){
 			ctx.clearRect(0, 0, WIDTH, HEIGHT);
@@ -126,14 +123,28 @@ window.onload = function(){
 			   		pass.push(btns[i].index);
 			   		btns[i].active = false;
 			   		input++;
-			   		
+			   		canvas.style.cursor = "pointer";
 			   		drawLine();
 				}
 			}
 
 		}
+		// else{
+		// 	for(var j=0,len2 = btns.length ;j<len2;j++){
+		// 		if(btns[j].active && Math.pow(x-btns[j].x,2)+Math.pow(y-btns[j].y,2) <= Math.pow(radius,2)){
+		// 			//console.log(x+" "+y);
+			   		
+		// 	   		canvas.style.cursor = "pointer";
+			   		
+		// 		}else{
+		// 			canvas.style.cursor = "auto";
+		// 		}
+		// 	}
+
+		// }
 	};
 	canvas.onmouseup = function(){
+		canvas.style.cursor = "auto";
 
 		if(input>=4){
 
@@ -205,6 +216,143 @@ window.onload = function(){
 	canvas.onmouseout = function(){
 		img.setAttribute('src','img/1.png');
 	};
+
+
+	//手机点击事件
+	canvas.addEventListener("touchstart",function(event){
+		var e = event || window.event;
+		var touch = event.targetTouches[0];
+		e.preventDefault();
+		var x = touch.clientX - offsetX;
+        var y = touch.clientY - offsetY;
+
+        //canvas.style.cursor = "pointer";
+        for(var i=0,len = btns.length ;i<len;i++){
+
+			if(Math.pow(x-btns[i].x,2)+Math.pow(y-btns[i].y,2) <= Math.pow(radius,2)){
+			   pass.push(btns[i].index);
+			   btns[i].active = false;
+			   input++;
+			}
+		}
+		
+
+	});
+	//手机移动事件
+	canvas.addEventListener("touchmove",function(event){
+		
+		img.setAttribute('src','img/2.png');
+		var e = event || window.event;
+
+		e.preventDefault();
+		var touch = e.targetTouches[0];
+		var x = touch.clientX - offsetX;
+		var y = touch.clientY - offsetY;
+		//console.log(x+" "+y);
+		if(input > 0){
+			ctx.clearRect(0, 0, WIDTH, HEIGHT);
+			drawBtns("#ccc",3);
+
+			var lastBtn = getBtn(pass[input-1]);
+			var lastX = lastBtn.x;
+			var lastY = lastBtn.y;
+
+			ctx.strokeStyle = 'rgba(2,44,233,1)';
+			ctx.lineWidth = "5";
+			ctx.lineCap="round";
+			ctx.beginPath();
+			ctx.moveTo(lastX, lastY);
+			ctx.lineTo(x, y);
+			//ctx.closePath();
+			ctx.stroke();
+
+			drawLine();
+		
+			for(var i=0,len = btns.length ;i<len;i++){
+				if(btns[i].active && Math.pow(x-btns[i].x,2)+Math.pow(y-btns[i].y,2) <= Math.pow(radius,2)){
+					//console.log(x+" "+y);
+			   		pass.push(btns[i].index);
+			   		btns[i].active = false;
+			   		input++;
+			   		canvas.style.cursor = "pointer";
+			   		drawLine();
+				}
+			}
+		}
+	});
+	//手机离开事件
+	canvas.addEventListener("touchend",function(event){
+		
+		img.setAttribute('src','img/1.png');
+		if(input>=4){
+
+			console.log("Password is:");
+			var password = pass[0];
+			for(var i = 1,len = input; i < len ; i++){
+				password = password +" "+ pass[i];
+			}
+
+			var oldPass = getPass();
+			if(processPass === 0){
+				
+				//已有密码，输入正确密码解锁，并更改密码
+				if( typeof oldPass == 'string' ){
+					if(password == oldPass){
+						show.innerHTML="验证成功，请输入新密码";
+						clearPass();
+					}else{
+						show.innerHTML="密码输入错误，输入正确密码进行修改";
+					}
+
+				}else{//没有密码，第一次使用
+					show.innerHTML="新密码存入成功！";
+					storePass(password);
+
+				}
+			}else if(processPass === 1){//验证密码
+				//已有密码，输入正确密码解锁，并更改密码
+				if( typeof oldPass == 'string' ){
+					if(password == oldPass){
+						show.innerHTML="验证成功";
+					}else{
+						show.innerHTML="验证失败,请重新输入";
+					}
+
+				}
+				else{
+					set.checked = 'true';
+					show.innerHTML="首次使用，请设置密码";
+					processPass =0;
+				}
+			}
+			//画背景
+			ctx.clearRect(0, 0, WIDTH, HEIGHT);
+			initBtns();
+			drawBtns("#ccc",3);
+			
+			//清空状态
+			pass = [];
+			input = 0;
+			
+			console.log(password);
+		}else if(input > 0){
+			//画背景
+			ctx.clearRect(0, 0, WIDTH, HEIGHT);
+			initBtns();
+			drawBtns("#ccc",3);
+			
+			//清空状态
+			pass = [];
+			input = 0;
+			
+			show.innerHTML="输入密码小于4位！";
+
+		}
+	});
+
+
+
+	//画出连接线
 	function drawLine(){
 		if(input >= 2){
 			var fistBtn = getBtn(pass[0]);
