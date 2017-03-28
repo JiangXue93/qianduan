@@ -6,6 +6,8 @@ ___
 代码地址如下：
 GitHub:[https://github.com/JiangXue93/qianduan/tree/master/%E7%BB%84%E4%BB%B6/%E6%89%8B%E5%8A%BF%E9%94%81%E5%B1%8F](https://github.com/JiangXue93/qianduan/tree/master/%E7%BB%84%E4%BB%B6/%E6%89%8B%E5%8A%BF%E9%94%81%E5%B1%8F)
 
+GitHub.io:[https://jiangxue93.github.io/qianduan/%E7%BB%84%E4%BB%B6/%E6%89%8B%E5%8A%BF%E9%94%81%E5%B1%8F/index.html](https://jiangxue93.github.io/qianduan/%E7%BB%84%E4%BB%B6/%E6%89%8B%E5%8A%BF%E9%94%81%E5%B1%8F/index.html)
+
 &emsp;&emsp;准备参加360的前端星计划，遇到了写手势解锁这个作业。做了有大概四个晚上吧，由于之前用canvas做过简单的贝塞尔曲线，所以此次考虑直接用canvas做。过程中发现太有趣了，写代码停不下来有没有，首先看看最终的效果图吧！
 &emsp;&emsp;PS.屏幕下方图片参考B站客户端输入密码界面，第一次遇到的时候被萌一脸，所以我也当致敬一下了！
 
