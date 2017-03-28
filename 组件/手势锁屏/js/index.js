@@ -17,7 +17,7 @@ var set = document.getElementById('set');
 var time = document.getElementById('time');
 var wrap = document.getElementById('wrap');
 
-window.onresize= function(){ location=location }; 
+window.onresize= function(){ location=location ;}; 
 window.onload = function(){
 	var radius = countRad(WIDTH);
 	//动态修改页面顶部时间
