@@ -28,8 +28,9 @@ GitHub.io:[https://jiangxue93.github.io/qianduan/%E7%BB%84%E4%BB%B6/%E6%89%8B%E5
 4. canvas中的button按钮hover上会修改当前鼠标样式；
 5. 已点击button按钮和未点击button按钮可从样式上明显区分；
 6. 添加“重置密码”按钮，再也不怕忘记密码了；
-7. 误操作（密码数少于四位，密码错误）均会触发页面抖动，提示用户；
-8. 添加类似Android系统的toast提示，指引用户正确使用。
+7. 密码存储在localstorage中，方便验证； 
+8. 误操作（密码数少于四位，密码错误）均会触发页面抖动，提示用户；
+9. 添加类似Android系统的toast提示，指引用户正确使用。
 
 
 
