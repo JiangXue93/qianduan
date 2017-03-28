@@ -1,8 +1,6 @@
 * {
 	padding: 0;
 	margin: 0;
-
-
 }
 html,body{
 	min-width: 400px;
@@ -23,7 +21,6 @@ html,body{
 }
 #head-bar__signal span{
 	float: left;
-
 	margin: 5px 1px;
 	width: 8px;
 	height: 8px;
@@ -56,20 +53,14 @@ html,body{
 #head-bar__battary:before{
 	content: " ";
 	display: block;
-	/*position: absolute;
-	top:0;
-	left: 0;*/
 	margin: 1px 1px;
-	//width: 16px;
 	height: 6px;
 	background-color: black;
-	//border: 1px solid black;
 	border-radius: 2px;
 	animation: charge 2s ease-in-out infinite;
 	-webkit-animation:charge 2s ease-in-out infinite;/* Safari 和 Chrome */
 	-moz-animation: charge 2s ease-in-out infinite;	/* Firefox */
 	-o-animation: charge 2s ease-in-out infinite;/* Opera */
-	//animation: charge-col 1s ease-in infinite;
 }
 #head-bar__battary:after{
 	content: " ";
@@ -82,9 +73,88 @@ html,body{
 	background-color: black;
 	border-top-right-radius: 2px;
 	border-bottom-right-radius: 2px;
-
 }
 
+#title{
+	display: block;
+	font-size: 1.5rem;
+	border-bottom: 1.6px solid #ABAAAA;
+}
+#title {
+	//width: 4em;
+	//display: block;
+	padding: 10px 0;
+	//padding: 20px 10px;
+	font-size: 24px;
+	text-align: center;
+}
+#myCanvas{
+	margin: 0 50px;
+}
+#control{
+	padding:0 50px; 
+}
+#lable-box{
+	text-align: center;
+}
+label:nth-child(2){
+	margin-left: 15px; 
+	line-height: 50px;
+}
+#reset{
+	display: block;
+	width: 190px;
+	height: 30px;
+	margin:10px auto;
+	background:linear-gradient(to bottom,#FCFBFB 0%,#C4C4C4 50%,#ECEBEB 100%);
+	border:1px solid #CCC;
+	border-radius: 10px;
+
+}
+#reset:focus{
+	outline: none;
+}
+#reset:hover,label:hover{
+	cursor: pointer;
+}
+#reset:active{
+	background:linear-gradient(to bottom,#FCFBFB 0%,#C4D7FC 50%,#ECEBEB 100%);
+}
+
+#forFun img{
+	width: 400px;
+}
+.show-wrap{
+	filter:alpha(opacity=0); /* IE */  
+	-moz-opacity:0; /* 老版Mozilla */  
+    -khtml-opacity:0; /* 老版Safari */  
+    opacity: 0; /* 支持opacity的浏览器*/  
+	height: 50px;
+}
+.show{
+	animation: fadeInOut 2s linear; 
+	-webkit-animation: fadeInOut 2s linear;/* Safari 和 Chrome */
+	-moz-animation: fadeInOut 2s linear;/* Firefox */
+	-o-animation: fadeInOut 2s linear;/* Opera */
+}
+.showMobile{
+	filter:alpha(opacity=1); /* IE */  
+	-moz-opacity:1; /* 老版Mozilla */  
+    -khtml-opacity:1; /* 老版Safari */  
+    opacity: 1; /* 支持opacity的浏览器*/  
+}
+#show{
+	text-align: center;
+	line-height: 30px;
+	background: #C5C5C5;
+	border-radius: 10px;
+}
+.shack{
+	animation: shackMe 0.4s linear;
+	-webkit-animation:shackMe 0.4s linear;/* Safari 和 Chrome */
+	-moz-animation: shackMe 0.4s linear;/* Firefox */
+	-o-animation: shackMe 0.4s linear;/* Opera */
+}
 @keyframes charge{
 	0%{
 		width: 0px;
@@ -130,72 +200,54 @@ html,body{
 
 }
 
-#title{
-	display: block;
-	font-size: 1.5rem;
-	border-bottom: 1.6px solid #ABAAAA;
+@keyframes fadeInOut {
+0% {opacity: 0;} /*初始状态 透明度为0*/
+20% {opacity: 1;} /*中间状态 透明度为1*/
+70% {opacity: 1;} /*中间状态 透明度为1*/
+100% {opacity: 0;}/*结尾状态 透明度为0*/	
 }
-#title {
-	//width: 4em;
-	//display: block;
-	padding: 10px 0;
-	//padding: 20px 10px;
-	font-size: 24px;
-	text-align: center;
+@-moz-keyframes fadeInOut {
+0% {opacity: 0;} /*初始状态 透明度为0*/
+20% {opacity: 1;} /*中间状态 透明度为1*/
+70% {opacity: 1;} /*中间状态 透明度为1*/
+100% {opacity: 0;}/*结尾状态 透明度为0*/	
 }
-/*#head-bar__company::before{
-	content:"";
-	display: inline-block;
-	width: 10px;
-	height: 10px;
-	background:black;
-}*/
-#myCanvas{
-	/*width: 300;
-	height: 300;*/
-	margin: 0 50px;
-	/border: 1px solid red;
+@-webkit-keyframes fadeInOut {
+0% {opacity: 0;} /*初始状态 透明度为0*/
+20% {opacity: 1;} /*中间状态 透明度为1*/
+70% {opacity: 1;} /*中间状态 透明度为1*/
+100% {opacity: 0;}/*结尾状态 透明度为0*/	
 }
-#control{
-	padding:0 50px; 
-}
-#lable-box{
-	text-align: center;
-}
-label:nth-child(2){
-	margin-left: 15px; 
-	line-height: 50px;
-	
-
-
-}
-#reset{
-	display: block;
-	width: 190px;
-	height: 30px;
-	margin:10px auto;
-	/background-color: #F6F6F6;
-	background:linear-gradient(to bottom,#FCFBFB 0%,#C4C4C4 50%,#ECEBEB 100%);
-	border:1px solid #CCC;
-	border-radius: 10px;
-	//box-shadow: 1px 2px 2px #888888;
-
-}
-#reset:focus{
-	outline: none;
-}
-#reset:hover,label:hover{
-	cursor: pointer;
-}
-#reset:active{
-	background:linear-gradient(to bottom,#FCFBFB 0%,#C4D7FC 50%,#ECEBEB 100%);
-	/background-color: #C3C2C2;
-	//color: white;
+@-o-keyframes fadeInOut {
+0% {opacity: 0;} /*初始状态 透明度为0*/
+20% {opacity: 1;} /*中间状态 透明度为1*/
+70% {opacity: 1;} /*中间状态 透明度为1*/
+100% {opacity: 0;}/*结尾状态 透明度为0*/	
 }
 
-#forFun img{
-	width: 400px;
+@keyframes shackMe{
+0% {transform: translateX(5px);}
+25% {transform: translateX(-5px);} /*初始状态*/
+75% {transform: translateX(5px);} /*中间状态*/
+100% {transform: translateX(-5px);}/*结尾状态*/	
 }
-#show{
-	height: 50px;
+@-moz-keyframes shackMe{
+0% {transform: translateX(5px);}
+25% {transform: translateX(-5px);} /*初始状态*/
+75% {transform: translateX(5px);} /*中间状态*/
+100% {transform: translateX(-5px);}/*结尾状态*/	
 }
+@-webkit-keyframes shackMe{
+0% {transform: translateX(5px);}
+25% {transform: translateX(-5px);} /*初始状态*/
+75% {transform: translateX(5px);} /*中间状态*/
+100% {transform: translateX(-5px);}/*结尾状态*/	
+}
+@-o-keyframes shackMe{
+0% {transform: translateX(5px);}
+25% {transform: translateX(-5px);} /*初始状态*/
+75% {transform: translateX(5px);} /*中间状态*/
+100% {transform: translateX(-5px);}/*结尾状态*/	
+}
+
+

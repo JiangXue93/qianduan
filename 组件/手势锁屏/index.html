@@ -22,23 +22,20 @@
 			手势密码
 		</div>
 	</header>
-
 	<canvas id="myCanvas" width="300" height="300">您的设备不支持canvas_(:зゝ∠)_请使用最新版浏览器，或者更换浏览器！</canvas>
-
 	<div id="control">
 		<div id="lable-box">
-			<label for="set"><input type="radio" name="choose" class="choose" id="set">设置密码</label>
+			<label for="set"><input type="radio" name="choose" class="choose" id="set" checked>设置密码</label>
 			<label for="confirm"><input type="radio" name="choose" class="choose" id="confirm">验证密码</label>
 		</div>
-		
 		<button id="reset">重置密码</button>
-		<div id="show"> </div>
+		<div class="show-wrap">
+			<div id="show"></div>
+		</div>	
 	</div>
 	<div id="forFun">
 		<img src="img/1.png">
 	</div>
-	
-	
 </div>
 <script type="text/javascript" src="js/index.js"></script>
 </body>
