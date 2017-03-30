@@ -197,7 +197,7 @@ window.onload = function(){
 	canvas.addEventListener("touchstart", function(event){
 		img.setAttribute('src','img/2.png');
 		var e = event || window.event;
-		var touch = event.targetTouches[0];
+		var touch = e.targetTouches[0];
 		e.preventDefault();
 		var x = touch.clientX - offsetX;
         var y = touch.clientY - offsetY;
