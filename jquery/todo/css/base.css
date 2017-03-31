@@ -6,9 +6,9 @@
 	-moz-transition: background .3s;
 	-o-transition: background .3s;
 	outline: 0;
-	transition: border 1s;
-	transition: border-bottom-right-radius 1s;
-	transition: border-bottom-left-radius 1s;
+	transition: border 2s;
+	transition: border-bottom-right-radius 2s;
+	transition: border-bottom-left-radius 2s;
 }
 
 body{
@@ -34,7 +34,8 @@ h1{
 
 input,button,textarea, 
 .task-item,
-.task-detail-mask{
+.task-detail-mask,
+.task-detail{
 	padding: 10px;
 	border-radius: 5px;
 }
@@ -74,10 +75,11 @@ input[type=date]:focus{
 }
 
 
-button{
+[type=submit]{
 	display: inline-block;
 	cursor: pointer;
-	color: #333;
+	color: #fff;
+	background: #52AD14;
 }
 
 .add-task input[type=text]{
@@ -87,7 +89,7 @@ button{
 }
 
 .add-task [type=submit]{
-	background: #52AD14;
+	
 	width: 15%;
 }
 .add-task [type=submit],
@@ -98,8 +100,9 @@ button{
 	-moz-box-shadow: 0 2px 3px rgba(0,0,0,.5);
 	
 }
-.add-task [type=submit]:hover{
+[type=submit]:hover{
 	background: #83E541;
+	color:#333;
 }
 .task-item{
 	padding: 10px;
@@ -109,6 +112,22 @@ button{
 	border-radius: 5px;
 	cursor: pointer;
 	
+}
+.task-item.completed{
+	background: rgba(255,255,255,.75);
+}
+.task-item.completed:before{
+	content: "";
+	display: block;
+	width: 98%;
+	height: 1px;
+	
+	background: #BBB8B8;
+	position: relative;
+	top: 10px;
+	right: 0;
+	transform: translateX(20px);
+	/*float: right;*/
 }
 
 
@@ -129,19 +148,25 @@ button{
 	color:#555;
 }
 .task-detail-mask,
-.task-detail{
-	position: absolute;
+.task-detail {
 	display: none;
+	
 }
 
-.task-detail{
-	bottom: 0;
+.task-detail {
+	position: absolute;
+	top: 0;
 	right:0;
 	color: #333;
 	background: #fff;
 	padding: 10px;
 	width: 50%;
 	height: 100%;
+	min-height: 250px;
+	box-shadow: 2px 2px 4px rgba(0,0,0,1);
+	-o-box-shadow: 2px 2px 4px rgba(0,0,0,1);
+	-moz-box-shadow: 2px 2px 4px rgba(0,0,0,1);
+	-webkit-box-shadow: 2px 2px 4px rgba(0,0,0,1);
 }
 .task-detail .content {
 	font-weight: bold;
@@ -151,13 +176,14 @@ button{
 textarea{
 	min-height:100px; 
 }
-.task-detail > *{
-	padding: 10px 0;
+.task-detail *{
+	margin: 3px 0;
 }
 .task-detail-mask{
+	position: fixed;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background: rgba(30,30,30,.6);
+	background: rgba(100,100,100,.5);
 }
