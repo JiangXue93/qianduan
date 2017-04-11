@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>弹幕</title>
+	<script src="jquery-3.2.0.js"></script>
+<style type="text/css">
+* {
+	padding: 0;
+	margin: 0;
+
+}
+.main-wrap {
+	width: 640px;
+	height:800px;
+	background: green;
+	margin:0 auto;
+}
+.bullet-bar {
+	font-size: 0px;
+}
+#back {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.bullet-content {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	background: rgba(24,155,0,0);
+	overflow: hidden;
+}
+li {
+	margin-top: 5px; 
+	font-size: 25px;
+	
+	padding: 0 10px;	
+	/*background: #e42;*/
+	opacity: 1;
+	margin-bottom: -30px;
+	transition: opacity 4s ease-out;
+	list-style-type: none;
+
+	/*//animation: ding 0.5s;*/
+	/*animation-fill-mode : forwards;
+	animation: inOut 5s; */
+}
+.bullet span{
+	line-height: 35px;
+	display: inline-block;
+	padding: 2px 5px;
+	background: rgba(200,200,200,0.6);
+	border-radius: 15px;
+}
+.bullet-input,
+.bullet-send {
+	box-sizing: border-box;
+	background:none;  
+   	outline:none;  
+   	border:1px solid #666;  
+	border-radius: 7px;
+}
+.bullet-input {
+	width: 550px;
+	height: 30px;
+}
+.bullet-send {
+	width: 90px;
+	height: 30px;
+}
+
+.fadeInOut {
+	opacity: 0;
+	/*animation: inOut 10s;
+	animation-fill-mode : forwards;*/	
+}
+.slideIn {
+	margin-bottom: 0px;
+}
+/*@keyframes ding{
+	0% {margin-bottom: -30px}
+	100% {margin-bottom: 0px}
+}*/
+@keyframes inOut{
+	0% {opacity: 1}
+	60% {opacity: 1}
+	100% {opacity: 0;}
+
+}
+
+</style>
+</head>
+<body>
+<div class="main-wrap">
+	<div id="back">
+		<div class='bullet-content'></div>
+	</div>
+	<div class="bullet-bar">
+		<input type="text" name="bullet-input" class="bullet-input">
+		<button class="bullet-send">发送</button>
+	</div>	
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	var $bulletContent = $('.bullet-content')
+		,$bulletInput = $('.bullet-input')
+		,$bulletSend = $('.bullet-send')
+		,$back = $('#back')
+		,$bulletFirst
+		,$bulletLast;
+	
+	$bulletInput.on( 'keyup', function(e){
+		var ev = document.all ? window.event : e;
+		if( ev.keyCode==13){
+			// if(!$bulletInput.val()){
+			// return;
+			// } 
+			// //页面渲染输入弹幕
+			// rend($bulletInput.val());
+			// $bulletInput.val("");
+			// if($bulletLast.prev()){
+			// 	$bulletLast.prev().addClass('fadeInOut');
+			// }
+			send();
+
+		}
+	} );
+	//发送按钮的监听
+	$bulletSend.on('click', function(){ 
+
+		//向服务器发送$bullet.val()和时间戳*******************
+		send();
+
+
+
+	});
+	//定时取数据，并判断弹幕数量，清除已经展示的弹幕
+	setInterval(function() {
+		//弹幕添加淡出
+		if ($bulletLast) {
+			$bulletLast.addClass('fadeInOut');
+		}
+		//删除弹幕
+		if($bulletContent.children('li').length >= 4){
+			//console.log($bulletContent.children('li').length);
+			//$bulletFirst.remove();
+		
+			while( $bulletContent.children('li').length - 4 ){
+				$bulletFirst.remove();
+				$bulletFirst = $bulletContent.find('li:first-child');
+			}
+		}
+		//向后台请求数据
+		//@time：时间戳
+		//@referrer：歌曲名字
+		var request = $.ajax({
+			  url: "http://10.19.220.149:3000/bullet",
+			  method: "GET",
+			  data: { time : '200' ,
+			  		referrer:'lalalla'},
+			  dataType: "html"
+			}).done(function(data){
+				data = JSON.parse(data);
+				console.log(data[0].content);
+				rend(data[0].content)
+			});
+		//console.log($bulletContent.children('p').length);
+	},2000);
+
+	//读取输入，向后台发送数据
+	function send(){
+		//输入弹幕为空
+		if(!$bulletInput.val()){
+			console.log("请输入内容");
+			return;
+		} 
+		//发送请求
+		//@referrer：歌曲名字
+		//@timestamp：时间戳
+		var request = $.ajax({
+			  url: "http://10.19.220.149:3000/bullet",
+			  method: "post",
+			  data: { referrer : 'lalalla',
+			  		  timestamp : '200',
+			  		  content : $bulletInput.val()},
+			  dataType: "html"
+			}).done(function(text) {
+				if (parseInt(text)===1){
+					console.log("向后台发送成功");
+				}
+			});
+		//输入的弹幕页面渲染
+		rend($bulletInput.val());
+		$bulletInput.val("");
+		//当前弹幕前一个弹幕添加淡出
+		if($bulletLast.prev()){
+			$bulletLast.prev().addClass('fadeInOut');
+		}
+	}
+	//输入验证
+	function inputCheck(){
+		//为空
+		if(!$bulletInput.val()){
+			return false;
+		} 
+		return true;
+
+	}
+	//渲染弹幕，从服务器或者输入框获取新弹幕，加入到屏幕中
+	function rend(str){
+		//dom添加弹幕节点
+		var $p = $('<li class="bullet"><span>'+ str +'</span></li>');
+		$bulletContent.append($p);
+		// 添加推入动画
+		$bulletContent.find(':last-child').animate({ 'margin-bottom': 0 });
+		//获取当前弹幕
+		$bulletFirst = $bulletContent.find('li:first-child');
+		$bulletLast = $bulletContent.find('li:last-child');
+
+	}
+	
+})
+
+</script>
+
+</body>
+</html>

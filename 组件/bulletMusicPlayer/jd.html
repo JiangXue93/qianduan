@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jd</title>
+	<script src="jquery-3.2.0.js"></script>
+	<!-- <script src="https://open.onebox.so.com/index/getCurr?kw=1%7CUSD%7CCNY&callback="></script> -->
+	<script type="text/javascript" src="https://hq.sinajs.cn/?list=gb_jd"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+    var temp; 
+    var jdPrice = hq_str_gb_jd.split(',')[1];
+		console.log(jdPrice);
+	$.getJSON("https://open.onebox.so.com/index/getCurr?kw=1%7CUSD%7CCNY&callback=?", function(data){
+		temp = data.data[0].exchange;
+                console.log(temp);
+                console.log(temp * jdPrice);
+            }); 
+	// $.getJSON("https://hq.sinajs.cn/?list=gb_jd",function(data){
+		
+
+
+		
+
+	// })
+
+</script>
+ 
+	
+</body>
+</html>
