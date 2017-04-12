@@ -1,0 +1,86 @@
+<!-- 动态数据更新 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动态数据更新</title>
+</head>
+<body>
+<div id="chart" style="width:500px;height:500px;"></div>
+<script src="js/echarts.js"></script>
+<script>
+	var myChart = echarts.init(document.getElementById('chart'));
+
+	var base = +new Date(2017, 3, 1);
+	var oneDay = 24 * 3600 * 1000;
+	var date = [];
+
+	var data = [Math.random() * 150];
+	var now = new Date(base);
+
+	function addData() {
+	    now = [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/');
+	    date.push(now);
+	    data.push((Math.random() - 0.5) * 10 + data[data.length - 1]);
+
+	    now = new Date(+new Date(now) + oneDay);
+	}
+	//数据初始化
+	for (var i = 1; i < 100; i++) {
+	    addData();
+	}
+
+	var option = {
+		title: {
+			text: 'my Echarts - 动态数据更新'
+		},
+		legend: {
+				data: ['成交'],//data需要与name对应
+				left: 'right',
+				tooltip: {
+        			show: true
+   				}
+			},
+	    xAxis: {
+	        type: 'category',
+	        boundaryGap: false,
+	        data: date
+	    },
+	    yAxis: {
+	        boundaryGap: [0, '50%'],
+	        type: 'value'
+	    },
+	    series: [
+	        {
+	            name:'成交',
+	            type:'line',
+	            smooth:true,
+	            symbol: 'none',
+	            stack: 'a',
+	            areaStyle: {
+	                normal: {}
+	            },
+	            data: data
+	        }
+	    ]
+	};
+
+	myChart.setOption(option);
+	setInterval(function () {
+	    addData();
+	    myChart.setOption({
+	        xAxis: {
+	            data: date
+	        },
+	        series: [{
+	            name:'成交',
+	            data: data
+	        }]
+	    });
+	    date.shift();//时间
+	    data.shift();//数据
+	}, 1000);
+</script>
+</body>
+</html>

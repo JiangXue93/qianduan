@@ -1,0 +1,80 @@
+<!-- 第二个Echarts -->
+<!-- 饼状图、南丁格尔图 -->
+<!-- 涉及：单元素（文字，背景，视觉引导线）样式修改，hover样式修改 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>南丁格尔图</title>
+</head>
+<body>
+	<div id="chart" style="width:500px;height:500px;"></div>
+</body>
+<script src="js/echarts.js"></script>
+<script>
+	var myChart = echarts.init(document.getElementById('chart'));
+	var nameToFill = '1111111';
+	var option = {
+		title: {
+				text: 'my first Echarts'
+		},
+		backgroundColor: '#A6D4FE',//全局背景色
+		tooltip: {},//鼠标提示
+		visualMap: {//根据数值控制明暗
+			show: false,
+			min: 20,
+			max: 300,
+			inRange: {
+				colorLightness: [0,1]
+			}
+		},
+		series: {
+			name: '来源',
+			type: 'pie',
+			roseType: 'angle',//南丁格尔图
+			radius: '50%',//饼图大小
+			data:[
+				{
+					value:235,
+					name: nameToFill,
+					// itemStyle: {//单独设置颜色
+					// 	normal: {
+					// 		color: '#532221'
+					// 	}
+					// }
+				},
+				{value:205,name:'啊是的2呀是'},
+				{value:275,name:'啊是的3呀是'},
+				{value:101,name:'啊是的4呀是'}
+			]
+		},
+		itemStyle: {
+			normal: {//正常展示下的样式
+				shadowBlur: 100,//阴影
+				shadowOffsetX: 0,
+				shadowOffsetY: 0,
+				shadowColor: 'rgba(0, 0, 0, 0.3)',
+				//颜色
+				color: '#c23531'
+			},
+			emphasis: {//鼠标 hover 时候的高亮样式
+        		shadowBlur: 250,
+        		shadowColor: 'rgba(0, 0, 0, 0.8)',
+        		color: '#84F42A'
+   			}
+		},
+		textStyle: {//文本的样式
+        	color: 'rgba(255, 255, 233, 0.9)'
+   		},
+   		
+   		labelLine: {//视觉引导线样式
+   			normal:{
+   				lineStyle: {
+   					color: 'rgba(0,0,0,1)'
+   				}
+   			}
+   		}
+	};
+	myChart.setOption(option);
+</script>
+</html>

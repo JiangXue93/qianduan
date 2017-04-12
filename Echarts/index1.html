@@ -1,0 +1,42 @@
+<!-- 第一个Echarts -->
+<!-- 柱状图 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Echarts</title>
+</head>
+<body>
+	<div id="main" style="width: 600px;height:400px;"></div>
+	<script src="js/echarts.js"></script>
+	<script type="text/javascript">
+		var myChart = echarts.init(document.getElementById('main'));
+
+		var option = {
+			title: {
+				text: 'my first Echarts'
+			},
+			tooltip: {},
+			legend: {
+				data: ['销量111']
+			},
+			xAxis: {
+				data: ["衬衫","裤子","袜子","毛内裤","棉毛裤"]
+			},
+			yAxis: {},
+			series: [{
+				name: '销量111',
+				type: 'bar',
+				data: [5, 20, 36, 14, 11]
+				},{
+				name: '销量111',
+				type: 'bar',
+				data: [5, 20, 36, 14, 11],
+				
+			}]
+		};
+
+		myChart.setOption(option);
+	</script>
+</body>
+</html>
