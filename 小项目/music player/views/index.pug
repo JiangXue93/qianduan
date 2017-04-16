@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    title 皮皮虾音乐
+    meta(name='viewport', content='width=device-width,initial-scale=1.0,user-scalable=no')
+    link(rel='stylesheet', href='./css/normalize.css')
+    link(rel='stylesheet', href='./css/main.css')
+    link(rel="shortcut icon", href="./img/icon.png")
+  body
+    header
+      .btn-wrap
+        a.next-btn
+      h3 皮皮虾精选
+    .container-disc
+      .container-canvas
+        canvas.round-bar
+      .pause-btn
+        .container-cover
+        .triangle
+      audio.music(controls='controls', preload='auto', hidden)
+      .title
+        span
+    .main-wrap
+      #back
+        span.tip 点这里输入弹幕
+        .bullet-content
+      .bullet-bar
+        input.bullet-input(type='text', name='bullet-input')
+        button.bullet-send 发送
+    script(src='./js/jquery-3.2.0.min.js')
+    script(src='./js/Bullet.js')
+    script(src='./js/main.js')
