@@ -7,7 +7,7 @@ body {
 	height: 100%;
 	font-size: 50px;
 	font-family:  "华文仿宋",Georgia, "Times New Roman", Times, serif;
-	
+	display: none;
 }
 .tip_cover,
 
@@ -27,8 +27,14 @@ body {
 	
 }
 .record_cover {
-	margin: 0;
+	margin: 0 auto;
 	height: 50%;
+	max-width: 500px;
+	/*margin-left: 300px;*/
+	
+}
+.record {
+	max-width: 500px;
 }
 .tip {
 	display: block;
@@ -55,4 +61,20 @@ body {
 	border:none;
 	border-top: 2px solid hsl(0, 0%, 60%);
 	border-left: 3px solid hsl(0, 0%, 60%);
+}
+.game {
+	height: 100vh;
+	background: rgba(0, 0, 0, .2);
+}
+header {
+	height: 10vh;
+	background: rgba(0, 0, 0, .2);
+}
+
+.canvas_wrap {
+	/*height: 90%;*/
+	background: rgba(51, 102, 153, .2);
+}
+#canvas {
+	display: block;
 }
