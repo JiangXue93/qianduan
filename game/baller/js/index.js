@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	let $start = $('.start')
+	var $start = $('.start')
 	   ,$welcome = $('.welcome')
 	   ;
 

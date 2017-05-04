@@ -1,6 +1,7 @@
 body {
 	width: 100vw;
 	height: 100vh;
+	overflow: hidden;
 }
 .welcome {
 	width: 100%;
@@ -10,21 +11,15 @@ body {
 	display: none;
 }
 .tip_cover,
-
 .start_cover {
 	width: 100%;
 	display: flex;
   	justify-content: center;
   	align-items: center;
-  	
-
-
 }
 .tip_cover {
 	height: 30%;
 	background: rgba(0,0,0,.2);
-	
-	
 }
 .record_cover {
 	margin: 0 auto;
@@ -70,7 +65,17 @@ header {
 	height: 10vh;
 	background: rgba(0, 0, 0, .2);
 }
-
+.svg{
+	position: absolute;
+	left:50%;
+	bottom: 0;
+	transform: translateX(-50%);
+}
+.table {
+	fill:rgb(0,0,255);
+	stroke-width:1; 
+	stroke:rgb(0,0,0);
+}
 .canvas_wrap {
 	/*height: 90%;*/
 	background: rgba(51, 102, 153, .2);
