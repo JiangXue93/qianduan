@@ -1,0 +1,90 @@
+.loader {
+	width: 100px;
+	height: 100px;
+	-webkit-perspective: 100px;
+	perspective: 100px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	background-color: black;
+	margin-top: -50px;
+	margin-left: -50px;
+}
+
+.loader__tile {
+	display: block;
+	float: left;
+	width: 33.33%;
+	height: 33.33%;
+	-webkit-animation: flip 2s ease-in-out infinite;
+	animation: flip 2s ease-in-out infinite;
+	
+}
+.loader__tile__1 {
+	background-color: hsl(168, 100%, 50%);
+	-webkit-animation-delay: 0.1s;
+	animation-delay: 0.1s;
+}
+.loader__tile__2 {
+	background-color: hsl(12, 100%, 50%);
+	-webkit-animation-delay: 0.1s;
+	animation-delay: 0.2s;
+}
+.loader__tile__3 {
+	background-color: hsl(225, 100%, 50%);
+	-webkit-animation-delay: 0.1s;
+	animation-delay: 0.3s;
+}
+.loader__tile__4 {
+	background-color: hsl(168, 100%, 70%);
+	-webkit-animation-delay: 0.1s;
+	animation-delay: 0.4s;
+}
+.loader__tile__5 {
+	background-color: hsl(12, 100%, 70%);
+	-webkit-animation-delay: 0.1s;
+	animation-delay: 0.5s;
+}
+.loader__tile__6 {
+	background-color: hsl(225, 100%, 70%);
+	-webkit-animation-delay: 0.1s;
+	animation-delay: 0.6s;
+}
+.loader__tile__7 {
+	background-color: hsl(168, 100%, 90%);
+	-webkit-animation-delay: 0.1s;
+	animation-delay: 0.7s;
+}
+.loader__tile__8 {
+	background-color: hsl(12, 100%, 90%);
+	-webkit-animation-delay: 0.1s;
+	animation-delay: 0.8s;
+}
+.loader__tile__9 {
+	background-color: hsl(225, 100%, 90%);
+	-webkit-animation-delay: 0.1s;
+	animation-delay: 0.9s;
+}
+@-webkit-keyframes flip {
+	0% {
+		-webkit-transform: rotateY(0deg);
+		transform: rotateY(0deg);
+	}
+	20% {
+		-webkit-transform: rotateY(180deg);
+		transform: rotateY(180deg);
+	}
+}
+
+@keyframes flip {
+	0% {
+		-webkit-transform: rotateY(0deg);
+		transform: rotateY(0deg);
+	}
+	20% {
+		-webkit-transform: rotateY(180deg);
+		transform: rotateY(180deg);
+	}
+}
+
+
