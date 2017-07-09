@@ -1,6 +1,9 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <!-- <p>{{ this.$router.params }}</p> -->
+    <button v-on:click="getParam">get Param</button>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -9,7 +12,12 @@ export default {
   name: 'hello',
   data () {
     return {
-      msg: 'JX: Welcome to My Vue.js App'
+      msg: 'JX: apple'
+    }
+  },
+  methods: {
+    getParam () {
+      console.log(this.$router.params);
     }
   }
 }
