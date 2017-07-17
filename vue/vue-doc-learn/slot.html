@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>作用域插槽</title>
+</head>
+<body>
+	<div id="app">
+		<div class="parent">
+		  <child>
+		    <template scope="propsa">
+		      <p>hello from parent</p>
+		      <p>{{ propsa.text }}</p>
+		    </template>
+		  </child>
+		</div>
+	</div>
+	<script src="script/vue.js"></script>
+	<script>
+		Vue.component('child',{
+		    template:'\
+		    	<div class="child">\
+		  			<slot text="hello from child">no</slot>\
+				</div>\
+		    '
+		})
+		new Vue({
+		  el: '#app',
+		  data: {
+		    msg: 'Hello Vue.js!'
+		  }
+		})
+	</script>
+</body>
+</html>

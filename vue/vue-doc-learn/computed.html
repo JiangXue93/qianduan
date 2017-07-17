@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>计算属性</title>
+</head>
+<body>
+	
+	<div id="example">
+		<p>{{message}}</p>
+		<p>{{reversedMessage}}</p>
+		<p>{{aDouble}}</p>		
+	</div>
+	<script src="script/vue.js"></script>
+		<script>
+			var vm = new Vue ( {
+				el: "#example",
+				data: {
+					message: "this is test",
+					a: 1
+				},
+				//计算属性所有的getter和setter的this上下文自动绑定为Vue实例
+				computed: {
+					reversedMessage: function () {
+						return this.message.split('').reverse().join('')
+					},
+					aDouble: function () {
+						return  this.a * 2
+					},
+					aPlus: {
+						get : function () {
+							return this.a + 10
+						},
+						set: function (v) {
+							this.a = v - 1
+						}
+					}
+				}
+			})
+		</script>
+</body>
+</html>

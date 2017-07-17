@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由</title>
+</head>
+<body>
+<div id="app">
+    <p>
+        <router-link to="/foo">foo</router-link>
+        <router-link to="/post">profile</router-link>
+        <router-link to="/user/foo">Home</router-link>
+        <router-link to="/user/foo/profile">profile</router-link>
+        <router-link to="/user/foo/posts">posts</router-link>
+    </p>
+    <router-view></router-view>
+</div>
+
+<div id="demo2">
+    <p>
+        <router-link to="/user2/foo">/user/foo</router-link>
+        <router-link to="/user2/foo1/profile">/user/foo1/profile</router-link>
+        <router-link to="/user2/foo2/posts">/user/foo2/posts</router-link>
+    </p>
+    <router-view></router-view>
+</div>
+<div id="demo3">
+    <p>
+        <router-link to="/">/HOME</router-link>
+        <router-link to="/about">/about</router-link>
+        <router-link to="/contact">/contact</router-link>
+    </p>
+    <router-view name="head"></router-view>
+    <router-view></router-view>
+    <router-view name="foot"></router-view>
+</div>
+<script src="script/vue.js"></script>
+<script src="script/vue-router.js"></script>
+<script>
+    // 1. 定义（路由）组件。
+    var foo = { template: '<div>Foo</div>'};
+    var posts = { template: '<div>Posts</div>'};
+    var UserHome = { template:'<div>Home {{ $route.params.id }} </div>'};
+    var UserProfile = { template: '<div>Profile:{{ $route.params.id }} {{ $route.params.path }}</div>'};
+//    var UserPosts = { template: '<div>Posts:{{ $route.params.id }} {{ $route.params.path }}</div>'};
+    // 2. 定义路由
+    var routes = [
+        { path: '/foo', component: foo},
+        { path: '/post', component: posts},
+        { path: '/user/:id', component: UserHome},
+        { path: '/user/:id/:path', component: UserProfile},
+//        { path: '/user/:id/:path', component: UserPosts},
+    ];
+    // 3. 创建 router 实例，然后传 `routes` 配置
+    var router = new VueRouter({
+        routes
+    })
+    //4.创建挂载实例
+    var app = new Vue({
+        router,
+        watch: {
+            '$route' (to, from) {
+                // 对路由变化作出响应...
+                console.log(to);
+            }
+        }
+    }).$mount('#app');
+</script>
+<!--//demo2*****************************************************-->
+<script>
+    const User2 = {
+        template: `
+             <div class="user2">
+                 <h2>User2 {{ $route.params.id }}</h2>
+                 <router-view></router-view>
+             </div>
+  `
+    }
+    const UserHome2 = { template: '<div>Home</div>' }
+    const UserProfile2 = { template: '<div>Profile</div>' }
+    const UserPosts2 = { template: '<div>Posts</div>' }
+
+    const router2 = new VueRouter({
+        routes:[
+            {
+                path: '/user2/:id', component: User2,
+                children: [
+                    { path: '', component: UserHome2 },
+                    { path: 'profile', component: UserProfile2 },
+                    { path: 'posts', component: UserPosts2 }
+                ]
+            },
+        ],
+    })
+    var demo2 = new Vue({
+        router:router2,
+        watch: {
+            '$route' (to, from) {
+                // 对路由变化作出响应...
+                console.log(to);
+//                router2.push('/jx/first')
+            }
+        }
+    }).$mount('#demo2');
+</script>
+<script>
+   const header = {template: '<div>this is HEAD, we could reuse this!</div>'};
+   const body = {template: '<div>{{ $route.params.id }}</div>'};
+   const footer = {template: '<div>this is foot, we could reuse this!</div>'};
+   const bodyMain = {template: '<div>shou ye</div>'};
+
+   const routers3 = new VueRouter({
+       routes: [
+           {path: '/',components:{
+               default: bodyMain,
+               head: header,
+               foot: footer
+           }},
+           {path: '/:id',components:{
+               default: body,
+               head: header,
+               foot: footer
+           }},
+           {path: '/:id',components:{
+               default: bodyMain,
+               head: header,
+               foot: footer
+           }}
+       ],
+   })
+   var demo3 = new Vue({
+       router:routers3,
+       watch: {
+           '$route' (to, from) {
+               // 对路由变化作出响应...
+               console.log(to);
+//                router2.push('/jx/first')
+           }
+       }
+   }).$mount('#demo3');
+
+</script>
+</body>
+
+</html>

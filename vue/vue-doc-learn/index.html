@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>learn</title>
+
+</head>
+<body>
+	<script src="script/vue.js"></script>
+	
+	<div class="app">
+ 	 	<p>{{ message }}</p>
+	</div>
+	<div id="app-2">
+		<span v-bind:title="message2">悬停查看</span>
+	</div>
+	<div id="app-3">
+		<p v-if="see">Now you see me</p>
+	</div>
+	<div id="app-4">
+		<ol>
+			<li v-for="todo in todos">
+				{{ todo.text }}
+			</li>
+		</ol>
+	</div>
+	<div id="app-5">
+		<p>{{ message }}</p>
+		<button v-on:click="reverseMsg">reverse</button>
+	</div>
+	<div id="app-6">
+		<p>{{ message }}</p>
+		<input v-model="message">
+		<p>{{ message2 }}</p>
+		<input v-model="message2">
+	</div>
+
+	<div id="app-7">
+		<ol>
+			<todo-item v-for="list in lists" v-bind:todo="list"></todo-item>
+		</ol>
+	</div>
+
+	<script>
+		
+	var test = new Vue({
+ 		 	el: '.app',
+	  		data: {
+    			message: 'Hello Vue!'
+  			}
+		})
+	var app2 = new Vue({
+		el: "#app-2",
+		data: {
+			message2: '页面加载于' + new Date()
+		}
+	})
+	var app3 = new Vue({
+		el: "#app-3",
+		data: {
+			see: true
+		}
+	})
+	var app4 = new Vue({
+		el: "#app-4",
+		data: {
+			todos:[
+				{text: 'learn js'},
+				{text: 'learn css'},
+				{text: 'learn html'}
+			]
+		}
+	})
+	var app5 = new Vue({
+		el: "#app-5",
+		data: {
+			message: "Hi!"
+		},
+		methods: {
+			reverseMsg: function () {
+				console.log(this.message);
+				this.message = this.message.split('').reverse().join('')
+			}
+		}
+	})
+	var app6 = new Vue({
+		el: "#app-6",
+		data: {
+			message: "this is test 6!",
+			message2: ""
+		}
+	})
+
+	Vue.component('todo-item', {
+		// "prop"，类似于一个自定义属性
+		props: ['todo'],
+		template: '<li>{{ todo.text }}</li>'
+	})
+	var app7 = new Vue({
+		el: '#app-7',
+		data: {
+			lists: [
+			{text: "potato"},
+			{text: "tomato"},
+			{text: "jianxi"}]
+		}
+	})
+	</script>
+</body>
+</html>

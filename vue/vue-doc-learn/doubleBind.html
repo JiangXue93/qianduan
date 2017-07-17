@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>双向绑定</title>
+</head>
+<body>
+<div id="test">
+	<input type="text" v-model.lazy="father">
+	<money-input :message="father" v-on:eventName='all'></money-input>
+</div>
+<script src="script/vue.js"></script>
+<script>
+
+	Vue.component('money-input', {
+		props: {
+			message: [String],
+		},
+		template:'<div><div>你已经输入:<span>{{message}}</span></div><div>处理后:<span>{{compute}}</span></div></div>',
+		methods:{
+			eventName: function () {
+				console.log(this.message);
+				this.$emit('eventName', this.message);
+			}
+		},
+		computed: {
+			compute: function () {
+				return this.message + 10
+			}
+		}
+		// data: function () {
+		// 	return {compute: this.message + 1}
+		// }
+	})
+		
+	var parent = new Vue({
+		el: '#test',
+		data:{
+			father: "123",
+		},
+		updated: function () {
+			this.father = this.father ? this.father : "";
+			console.log(this.father);
+			
+		},
+		methods: {
+			all: function () {
+				this.father += 1;
+			}
+		}
+	})
+</script>
+</body>
+</html>

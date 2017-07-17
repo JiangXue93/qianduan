@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>class and style bind</title>
+	<style>
+		.active{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="test" v-bind:class="classObject">asdf</div>
+	<div id="test2" v-bind:style="{color: activeColor, 'font-size': fontSize + 'px'}">123123</div>
+	<script src="script/vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el: '#test',
+			data:{
+		
+				isActive: true,
+				'text-danger': false,
+				error: false	
+			},
+			computed: {
+				classObject: function () {
+					return {
+						active: this.isActive && !this.error,
+						'text-danger': this.error
+					}
+				}
+			}
+		})
+		var t2 = new Vue({
+			el: '#test2',
+			data: {
+				activeColor: 'green',
+				fontSize: '50'
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义属性</title>
+</head>
+<body>
+    <div id="hook-argument-example" v-test:a.b="message"></div>
+    <div id="hook-argument-example2" v-demo="{ color: 'white', text: 'hello!' }"></div>
+<script src="script/vue.js"> </script>
+<script>
+    Vue.directive('test',{
+        bind: function (el, binding, vnode) {
+            var s = JSON.stringify;
+            console.log( binding.value);
+            console.log( binding.arg);//a 参数
+            el.innerHTML = s(binding.modifiers);//b 修饰符
+        }
+    });
+    Vue.directive('demo', function (el, binding) {
+        console.log(binding.value.color) // => "white"
+        console.log(binding.value.text)  // => "hello!"
+//        console.log(this)
+    });
+    new Vue({
+        el: '#hook-argument-example',
+        data:{
+            message: 'hello'
+        }
+    });
+    new Vue({//该部分不可少，不然不输出
+        el: '#hook-argument-example2'
+    })
+</script>
+</body>
+</html>

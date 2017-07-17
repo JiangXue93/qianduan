@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue购物车</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<style>
+	table{
+		margin-top: 100px;
+	}
+	tr:nth-child(even){
+		background: #eee;
+	}
+	.num-group {
+		line-height: 0;
+	}
+	#good-num {
+		width: 50%;
+		display: inline-block;
+		border: 1px solid gray;
+		height: 30px;
+	}
+	.num-btn {
+		border: 1px solid gray;
+		height: 25px;
+		box-sizing: border-box;
+	}
+	
+</style>
+<body>
+<div class="container" id="app">
+	<table class="table table-bordered">
+		<tr>
+			<th>#</th>
+			<th><input type="checkbox" v-bind:checked="selectAll" v-on:click="checkAll">全选</th>
+			<th>商品</th>
+			<th>单价</th>
+			<th>数量</th>
+			<th>小计</th>
+			<th>操作</th>
+		</tr>
+		<tr v-for="(item,index) in items">
+			<td>{{index}}</td>
+			<td><input type="checkbox" v-bind:checked="item.checked" v-on:click="checkOne(index)"></td>
+			<td>{{item.name}}</td>
+			<td>{{item.price}}</td>
+			<td>
+				<div class="num-group">
+					<input type="button" name="reduce" value="-" class="btn btn-success" v-on:click="reduceNum(index)">
+					<input type=text id="good-num" v-bind:value=item.num v-on:input="inputTest(index, $event.target.value)">
+					<input type="button" name="plus" value="+" class="btn btn-success" v-on:click="plusNum(index)">
+				</div>
+			</td>
+			<td>{{item.num * item.price}}</td>
+			<td><input type="button" name="delete" value="删除" class="btn btn-default" v-on:click="removeOne(index)"></td>
+		</tr>
+		<tr>
+			<td>总价</td>
+			<td colspan="5">{{total}}</td>
+			<td><input type="button" name="delete" value="清空" class="btn btn-danger" v-on:click="removeAll"></td>
+		</tr>
+	</table>
+	<input type="button" name="submit" value="提交订单" class="btn btn-info" v-on:click="">
+
+</div>
+<script src="script/vue.js"></script>
+<script src="script/vue-router.js"></script>
+<script>
+	var vm = new Vue({
+		el: "#app",
+		data: {
+			items: [
+				{
+					name: "java",
+					price: 1, 
+					num: 1,
+					checked: false
+				},
+				{
+					name: "HTML",
+					price: 10, 
+					num: 1,
+					checked: false
+				},
+				{
+					name: "CSS",
+					price: 100, 
+					num: 1,
+					checked: true
+				},
+				{
+					name: "node",
+					price: 1000, 
+					num: 1,
+					checked: true
+				}
+			],
+			selectAll: false,
+			
+		},
+		methods:{
+			inputTest: function (index,newNum) {
+
+				this.items[index].num = newNum < 0 ? 0 : newNum;
+			},
+			reduceNum: function (index) {
+				this.items[index].num = this.items[index].num ? this.items[index].num-1 : 0;
+			},
+			plusNum: function (index) {
+				this.items[index].num ++;
+			},
+			checkAll: function () {
+				for(var i = 0; i < this.items.length; i++){
+					this.items[i].checked = !this.selectAll;	
+				}
+				this.selectAll = !this.selectAll;
+			},
+			checkOne: function (index) {
+				this.items[index].checked = !this.items[index].checked;
+			},
+			removeAll: function ()  {
+				this.items = [];
+			},
+			removeOne: function (index) {
+				this.items.splice(index,1);
+			}
+		},
+		computed: {
+			total: function () {
+				var temp = 0;
+				for(var i = 0; i < this.items.length; i++){
+
+					temp = this.items[i].checked ? temp + this.items[i].price * this.items[i].num : temp;	
+				}
+				return temp;
+			}
+		}
+	})
+</script>
+</body>
+</html>

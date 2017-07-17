@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>条件渲染</title>
+</head>
+<body>
+<div id="test">
+	<h1>Tile</h1>
+	<template v-if="ok">
+		<template v-if="show">
+			<p>para1</p>
+			<p>para2</p>
+		</template>
+		<p v-else>para3</p>	
+	</template>
+	<p v-else>para4</p>
+
+	<div v-if="Math.random() > 0.5">
+ 		 Now you see me
+	</div>
+	<div v-else>
+  		Now you don't
+	</div>
+	<h2 v-show="notShow">v-show test</h2>
+
+</div>
+	<input v-model="message" placeholder="edit me">
+	<p>Message is: {{ message }}</p>
+	
+
+	<script src="script/vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el: "#test",
+			data: {
+				ok: true,
+				show: true,
+				notShow: false
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过渡状态</title>
+    <style>
+        .color-preview {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="animated-number-demo">
+    <input v-model.number="number" type="number" step="100">
+    <p>{{ animatedNumber }}</p>
+</div>
+<div id="animated-color-demo">
+    <input v-model="colorQuery" placeholder="#xxxxxx">
+    <button v-on:click="updateColor">Update</button>
+    <div class="color-preview" v-bind:style="{backgroundColor: tweenColor}">实际：{{tweenColor}}</div>
+    <p>目标：{{ color }}</p>
+</div>
+<div id="animated-component-demo">
+    <input v-model.Number="first" type="number" step="10">+<!--Number用于类型转换-->
+    <input v-model.Number="second" type="number" step="10"> =
+    {{result}}
+    <p>
+        <animated-int v-bind:value="first"></animated-int>+
+        <animated-int v-bind:value="second"></animated-int>=
+        <animated-int v-bind:value="result"></animated-int>
+    </p>
+</div>
+<script src="https://unpkg.com/color-js@1.0.3/color.js"></script>
+<script src="script/Tween.js"></script>
+<script src="script/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#animated-number-demo',
+        data: {
+            number: 0,
+            animatedNumber: 0
+        },
+        watch: {
+            number: function (newValue, oldValue){
+                var vm = this;
+                function animate (time) {
+                    //console.log(time+":"+newValue+" "+oldValue);
+                    requestAnimationFrame(animate);
+                    TWEEN.update(time);
+                }
+                new TWEEN.Tween({ tweeningNumber: oldValue })
+                    .easing(TWEEN.Easing.Quadratic.Out)
+                    .to({ tweeningNumber: newValue }, 500)
+                    .onUpdate(function () {
+                        vm.animatedNumber = this.tweeningNumber.toFixed(0)
+                    })
+                    .start();
+                    animate()
+            }
+        }
+
+    });
+    var vm2 = new Vue({
+        el: '#animated-color-demo',
+        data: {
+            colorQuery: '',
+            color:'#FF0000',
+            tweenColor:'#FF0000'
+        },
+
+        watch: {
+            color: function() {
+                console.log(123);
+
+                function animate (time) {
+                    requestAnimationFrame(animate);
+//                    console.log(time);
+                    TWEEN.update(time);
+                }
+                console.log(vm2.tweenColor);
+                console.log("color:"+vm2.color);
+                new TWEEN.Tween(this.tweenColor)
+                    .to(this.color, 1000)
+                    .onUpdate(function () {
+                        vm2.tweenColor = vm2.color;
+                        console.log(vm2.tweenColor);
+                    })
+                    .onComplete(function () {
+                        console.log(vm2.tweenColor);
+                    })
+                    .start();
+
+                animate();
+            }
+        },
+        methods:{
+            updateColor: function () {
+                console.log("update"+this.colorQuery);
+                this.color = this.colorQuery;
+                console.log("update"+this.color);
+                this.colorQuery = '';
+
+//                console.log(newColor,old)
+//
+
+            }
+        }
+    })
+
+    Vue.component('animated-int',{
+       template:"<span>{{tweenInt}}</span>",
+        props:{
+           value:{
+               type:Number,
+               required: true
+           }
+        },
+        data: function () {
+           return {tweenInt:0}
+        },
+        watch: {
+          value: function (newV,oldV) {
+              this.onTween(oldV,newV);
+          }
+        },
+        mounted: function () {
+            this.onTween(0,this.value);
+        },
+        methods:{
+           onTween: function (oldV,newV) {
+               var vm = this;//this这时是VueComponent对象
+               function animate (time) {
+                   requestAnimationFrame(animate);
+                   TWEEN.update(time);
+               }
+               new TWEEN.Tween({tweenInt:oldV})
+                   .to({tweenInt:newV}, 500)
+                   .onUpdate(function () {
+                       //this这时是传入的更改差值的Object对象
+                      vm.tweenInt = this.tweenInt.toFixed(0);
+                   })
+                   .start();
+               animate();
+           }
+        }
+    });
+    var vm3 = new Vue({
+        el: '#animated-component-demo',
+        data:{
+            first: 10,
+            second:20
+       },
+        computed: {
+            result: function (){
+                return this.first + this.second
+            }
+
+        }
+    });
+</script>
+</body>
+</html>
