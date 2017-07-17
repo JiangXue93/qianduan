@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Three框架-纹理</title>
+    <script src="script/three.js"></script>
+    <script src="script/Stats.js"></script>
+    <style type="text/css">
+        div#canvas-frame {
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            height: 600px;
+            background-color: #EEEEEE;
+        }
+
+    </style>
+    <script>
+        var renderer;
+        var stats ;
+        function initThree() {
+            width = document.getElementById('canvas-frame').clientWidth;
+            height = document.getElementById('canvas-frame').clientHeight;
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(width, height);
+            document.getElementById('canvas-frame').appendChild(renderer.domElement);
+            renderer.setClearColor(0xeeeeee, 1.0);
+
+            stats = new Stats();
+            stats.setMode(0); //  0: fps, 1: ms, 2: mb, 3+: custom
+            stats.domElement.style.position = 'absolute';
+            stats.domElement.style.left = '0px';
+            stats.domElement.style.top = '0px';
+            document.getElementById('canvas-frame').appendChild(stats.domElement);
+        }
+
+        var camera;
+        function initCamera() {
+            camera = new THREE.PerspectiveCamera(70, width / height, 1, 10000);
+            camera.position.x = 600;
+            camera.position.y = 600;
+            camera.position.z = 600;
+            camera.up.x = 0;//相机以哪个方向为上方(朝上的轴)
+            camera.up.y = 1;
+            camera.up.z = 0;
+            camera.lookAt({
+                x : 0,
+                y : 0,
+                z : 0
+            });
+        }
+
+        var scene;
+        function initScene() {
+            scene = new THREE.Scene();
+        }
+
+        var light;
+        function initLight() {
+//            light = new THREE.AmbientLight(0x00FF00);
+//            light.position.set(100, 100, 200);
+//            scene.add(light);
+
+//            light = new THREE.PointLight(0x0000FF);
+//            light.position.set(0, 0, 100);
+//            scene.add(light);
+            // A start
+            // 第二个参数是光源强度，你可以改变它试一下
+            light = new THREE.DirectionalLight(0xFF0000,1);
+            // 位置不同，方向光作用于物体的面也不同，看到的物体各个面的颜色也不一样
+            light.position.set(100,0,0);
+            scene.add(light);
+            // A end
+        }
+
+        var cube;
+        var mesh;
+        function initObject() {
+
+             createElementMaterial();
+//            mesh = new THREE.Mesh( geometry, material );
+//            mesh.position.set(300,0,0);
+//            scene.add(mesh);
+
+            var material2 = new THREE.MeshLambertMaterial({color:0xff0000});
+            var geometry2 = new THREE.CubeGeometry( 300, 300, 300);
+            var mesh2 = new THREE.Mesh( geometry2, material2 );
+//            scene.add(mesh2);
+//
+
+
+        }
+        function createElementMaterial() {
+//            var material = new THREE.MeshBasicMaterial();// create a material
+            var loader = new THREE.TextureLoader();
+            loader.load(
+                // resource URL
+//                'http://wow.techbrood.com/uploads/1702/crate.jpg',
+                'textures/a.jpg',
+                function ( texture ) {
+                    var geometry = new THREE.BoxGeometry( 500, 500, 500 );
+                    var material = new THREE.MeshBasicMaterial({color:0x739783,map:texture});
+                    mesh = new THREE.Mesh(geometry,material);
+                    scene.add(mesh);
+//                    return mesh;
+                },
+                // Function called when download progresses
+                function ( xhr ) {
+                    console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+                },
+                // Function called when download errors
+                function ( xhr ) {
+                    console.log( 'An error happened' );
+                }
+            );
+//            console.log(material);
+//            return material; // return the material
+        }
+        function initGrid(){
+            // 网格的边长是1000，每个小网格的边长是50
+            var helper = new THREE.GridHelper( 1000, 20 );
+            helper.setColors( 0x0000ff, 0x808080 );
+            scene.add( helper );
+        }
+        function threeStart() {
+            initThree();
+            initCamera();
+            initScene();
+//            initLight();
+            initObject();
+            initGrid();
+//            renderer.clear();
+            renderer.render(scene, camera);
+            render();
+//            animation();//动画
+        }
+        function render() {
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+            stats.update();
+        }
+        function animation()
+        {
+            mesh.rotation.y  += 0.01;
+            mesh.rotation.z  += 0.01;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animation);
+//            TWEEN.update();//不断更新
+            stats.update();
+        }
+
+    </script>
+</head>
+
+<body onload="threeStart();">
+<div id="canvas-frame"></div>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Three框架-阴影</title>
+    <script src="script/three.js"></script>
+    <script src="script/Stats.js"></script>
+    <style type="text/css">
+        div#canvas-frame {
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            height: 600px;
+            background-color: #EEEEEE;
+        }
+
+    </style>
+    <script>
+        var renderer;
+        var stats ;
+        function initThree() {
+            width = document.getElementById('canvas-frame').clientWidth;
+            height = document.getElementById('canvas-frame').clientHeight;
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(width, height);
+            document.getElementById('canvas-frame').appendChild(renderer.domElement);
+            renderer.setClearColor(0xeeeeee, 1.0);
+
+            renderer.shadowMap.Enabled = true;//渲染阴影
+            renderer.shadowMap.type = THREE.BasicShadowMap;
+
+            stats = new Stats();
+            stats.setMode(0); //  0: fps, 1: ms, 2: mb, 3+: custom
+            stats.domElement.style.position = 'absolute';
+            stats.domElement.style.left = '0px';
+            stats.domElement.style.top = '0px';
+            document.getElementById('canvas-frame').appendChild(stats.domElement);
+        }
+
+        var camera;
+        function initCamera() {
+            camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+            camera.position.x = 600;
+            camera.position.y = 600;
+            camera.position.z = 600;
+            camera.up.x = 0;//相机以哪个方向为上方(朝上的轴)
+            camera.up.y = 1;
+            camera.up.z = 0;
+            camera.lookAt({
+                x : 0,
+                y : 0,
+                z : 0
+            });
+        }
+
+        var scene;
+        function initScene() {
+            scene = new THREE.Scene();
+        }
+
+        var light;
+        function initLight() {
+//            light = new THREE.AmbientLight(0x00AA00);
+//            light.position.set(100, 100, 200);
+//            scene.add(light);
+
+//            light = new THREE.PointLight(0x0000FF);
+//            light.position.set(0, 0, 100);
+//            light.castShadow = true;//产生阴影
+//            scene.add(light);
+            // A start
+            // 第二个参数是光源强度，你可以改变它试一下
+            light = new THREE.DirectionalLight(0xFFFFFF,1 , 100);
+            // 位置不同，方向光作用于物体的面也不同，看到的物体各个面的颜色也不一样
+            light.position.set(0,1,0);
+            //light.target=mesh;
+            //Set up shadow properties for the light
+            light.castShadow = true;//产生阴影
+
+            light.shadow.mapSize.width = 512;  // default
+            light.shadow.mapSize.height = 512; // default
+            light.shadow.camera.near = 0.5;       // default
+            light.shadow.camera.far = 500      // default
+            scene.add(light);
+
+            // A end
+
+            var helper = new THREE.CameraHelper( light.shadow.camera );
+            scene.add( helper );
+        }
+
+        var cube;
+        var mesh
+        function initObject() {
+//            var geometry = new THREE.BoxBufferGeometry( 100, 100, 100);
+//            var material = new THREE.MeshStandardMaterial( { color:0xFF0000} );
+//            mesh = new THREE.Mesh( geometry,material);
+//            mesh.position.set(0,0,0);
+//            mesh.castShadow = true;//产生阴影
+//            mesh.receiveShadow = false;//不接收阴影
+//            scene.add(mesh);
+//
+//            var geometry2 = new THREE.PlaneBufferGeometry( 500, 500,32,32);
+//            var material2 = new THREE.MeshStandardMaterial( { color:0xFF0000} );
+//            var mesh2 = new THREE.Mesh( geometry2,material2);
+//            mesh2.rotation.x = -Math.PI * 0.5;
+//            mesh2.position.set(0,-200,0);
+//            mesh2.receiveShadow = true;//接收阴影
+//            scene.add(mesh2);
+              var sphereGeometry = new THREE.SphereBufferGeometry( 50, 320, 32 );
+              var sphereMaterial = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
+              var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+              sphere.castShadow = true; //default is false
+              sphere.receiveShadow = true; //default
+              scene.add( sphere );
+
+            //Create a plane that receives shadows (but does not cast them)
+              var planeGeometry = new THREE.PlaneBufferGeometry( 500, 500, 32, 32 );
+              var planeMaterial = new THREE.MeshStandardMaterial( { color: 0x00ff00 } )
+              var plane = new THREE.Mesh( planeGeometry, planeMaterial );
+              plane.rotation.x = - Math.PI * 0.5;
+              plane.position.set(0,-200,0);
+              plane.receiveShadow = true;
+              scene.add( plane );
+
+
+        }
+
+        function threeStart() {
+            initThree();
+            initCamera();
+            initScene();
+            initObject();
+            initLight();
+            renderer.clear();
+            renderer.render(scene, camera);
+            //animation();//动画
+        }
+        function animation()
+        {
+            mesh.rotation.y  += 0.01;
+            mesh.rotation.z  += 0.01;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animation);
+//            stats.update();
+//            TWEEN.update();//不断更新
+            stats.update();
+        }
+
+    </script>
+</head>
+
+<body onload="threeStart();">
+<div id="canvas-frame"></div>
+</body>
+</html>
