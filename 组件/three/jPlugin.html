@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试jquery插件</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/jThreex.js"></script>
+    <style>
+        * {
+            --fount-size: 20px;
+            --height: 24px;
+            padding: 0;
+            margin: 0;
+        }
+        ul {
+            padding-left: 0px;
+        }
+        li{
+            list-style: none;
+        }
+        .indent{
+            display: inline-block;
+            height: var(--height);
+            line-height: 1;
+            vertical-align: middle;
+            text-align: right;
+            font-size: 24px;
+            margin-right: 5px;
+        }
+        .jthreex-halfCheck::after {
+            content: '';
+            display: inline-block;
+            width: 50%;
+            height: 50%;
+            background-color: #313131;
+            line-height: 1;
+            margin-top:20%;
+            margin-left: 20%;
+            border-radius: 2px;
+        }
+        .jthreex-checkbox {
+            display: inline-block;
+            height: var(--height);
+            width: var(--height);
+            vertical-align: bottom;
+        }
+        #test {
+            background-color: rgba(76, 97, 204, 0.49);
+        }
+        #test2 {
+            background-color: rgba(102, 204, 102, 0.49);
+        }
+    </style>
+</head>
+<body>
+    <div id="test">自定义数据</div>
+    <div id="test2">插件原始数据</div>
+</body>
+<script>
+    $(document).ready(function () {
+        var myData = [{
+            id: 0,
+            text: "食材",
+            color: "#2c3cee",
+            backgroundColor: "#90aaa8",
+            icon:"",
+            selectIcon:"",
+            state: {
+                checked: false,
+                childCheck: true,
+                open: true,
+                wrap: true,
+            },
+            nodes: [
+                {
+                    id: 1,
+                    text: "肉",
+                    color: "#2c3cee",
+                    backgroundColor: "#90aaa8",
+                    icon:"",
+                    selectIcon:"",
+                    state: {
+                        checked: false,
+                        childCheck: true,
+                        open: true,
+                        wrap: true,
+                    },
+                    nodes: [
+                        {
+                            id: 11,
+                            text: "飞的",
+                            color: "#2c3cee",
+                            backgroundColor: "#90aaa8",
+                            icon:"",
+                            selectIcon:"",
+                            state: {
+                                checked: false,
+                                childCheck: true,
+                                open: true,
+                                wrap: true,
+                            },
+                            nodes: [
+                                {
+                                    id: 111,
+                                    text: "鸡",
+                                    color: "#2c3cee",
+                                    backgroundColor: "#90aaa8",
+                                    icon:"",
+                                    selectIcon:"",
+                                    state: {
+                                        checked: false,
+                                        childCheck: false,
+                                        open: true,
+                                        wrap: false,
+                                    },
+                                },
+                                {
+                                    id: 112,
+                                    text: "鸭",
+                                    color: "#2c3cee",
+                                    backgroundColor: "#90aaa8",
+                                    icon:"",
+                                    selectIcon:"",
+                                    state: {
+                                        checked: true,
+                                        childCheck: false,
+                                        open: true,
+                                        wrap: false,
+                                    },
+                                }
+                            ]
+                        },
+                        {
+                            id: 12,
+                            text: "游的",
+                            color: "#2c3cee",
+                            backgroundColor: "#90aaa8",
+                            icon:"",
+                            selectIcon:"",
+                            state: {
+                                checked: true,
+                                childCheck: true,
+                                open: true,
+                                wrap: true,
+                            },
+                            nodes: [
+                                {
+                                    id: 121,
+                                    text: "海里的",
+                                    color: "#2c3cee",
+                                    backgroundColor: "#90aaa8",
+                                    icon:"",
+                                    selectIcon:"",
+                                    state: {
+                                        checked: true,
+                                        childCheck: false,
+                                        open: true,
+                                        wrap: false,
+                                    },
+                                },
+                                {
+                                    id: 122,
+                                    text: "河里的",
+                                    color: "#2c3cee",
+                                    backgroundColor: "#90aaa8",
+                                    icon:"",
+                                    selectIcon:"",
+                                    state: {
+                                        checked: true,
+                                        childCheck: true,
+                                        open: true,
+                                        wrap: true,
+                                    },
+                                    nodes: [
+                                        {
+                                            id: 1221,
+                                            text: "草鱼",
+                                            color: "#2c3cee",
+                                            backgroundColor: "#90aaa8",
+                                            icon:"",
+                                            selectIcon:"",
+                                            state: {
+                                                checked: true,
+                                                childCheck: false,
+                                                open: true,
+                                                wrap: false,
+                                            },
+                                        },
+                                        {
+                                            id: 1222,
+                                            text: "鲶鱼",
+                                            color: "#2c3cee",
+                                            backgroundColor: "#90aaa8",
+                                            icon:"",
+                                            selectIcon:"",
+                                            state: {
+                                                checked: true,
+                                                childCheck: false,
+                                                open: true,
+                                                wrap: false,
+                                            },
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 123,
+                                    text: "池塘里的",
+                                    color: "#2c3cee",
+                                    backgroundColor: "#90aaa8",
+                                    icon:"",
+                                    selectIcon:"",
+                                    state: {
+                                        checked: true,
+                                        childCheck: false,
+                                        open: true,
+                                        wrap: false,
+                                    },
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    text: "菜",
+                    color: "#2c3cee",
+                    backgroundColor: "#90aaa8",
+                    icon:"",
+                    selectIcon:"",
+                    state: {
+                        checked: false,
+                        childCheck: false,
+                        open: true,
+                        wrap: false,
+                    },
+                },
+
+            ]
+        }];
+        $("#test").jThreex(myData);
+        $("#test2").jThreex();
+    });
+</script>
+</html>
