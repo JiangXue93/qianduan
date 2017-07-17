@@ -1,0 +1,15 @@
+body {
+	background: lightblue;
+}
+#qwe{
+	width: 100px;
+	height: 100px;
+    background-image: url("img/logo.png");/*3.2k*/
+    background-repeat: round;
+}
+#asd{
+	width: 400px;
+	height: 100px;
+    background-image: url("img/5.jpg");
+    background-repeat: round;
+}
