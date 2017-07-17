@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Three</title>
+    <style>
+        * {
+            --fount-size: 20px;
+            --height: 24px;
+            padding: 0;
+            margin: 0;
+        }
+        ul {
+            padding-left: 0px;
+        }
+        li{
+            list-style: none;
+        }
+        #tree {
+            font-size: var(--fount-size);
+        }
+        #tree ul{
+            font-size: inherit;
+        }
+        ul li {
+            height: var(--height);
+            line-height: 1;
+            vertical-align: bottom;
+            margin-top: 5px;
+        }
+        .indent{
+            display: inline-block;
+            height: var(--height);
+            line-height: 1;
+            vertical-align: middle;
+            text-align: right;
+            font-size: 24px;
+            margin-right: 5px;
+        }
+        .indent:hover,
+        input[type="checkbox"]{
+            cursor: pointer;
+        }
+        .halfCheck::after {
+            content: '';
+            display: inline-block;
+            width: 50%;
+            height: 50%;
+            background-color: #313131;
+            line-height: 1;
+            /*margin-left: 20%;*/
+            /*margin-bottom: 20%;*/
+            margin-top:20%;
+            margin-left: 20%;
+            border-radius: 2px;
+        }
+        input[type="checkbox"] {
+            display: inline-block;
+            height: var(--height);
+            width: var(--height);
+            vertical-align: bottom;
+        }
+        label{
+            display: inline-block;
+            background-color: #eee;
+            vertical-align: baseline;
+            height:25px;
+            font-size: 16px;
+        }
+
+        .radio-box {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 1px solid blue;
+            line-height: 16px;
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+        .radio:checked + .radio-box::after {
+            content: "";
+            display: inline-block;
+            margin-left: 2px;
+            margin-bottom: 2px;
+            line-height: 1;
+            width: 10px;
+            height: 10px;
+            border: 5px solid blue;
+            box-sizing: border-box;
+        }
+        .radio-box-half::after {
+            content: "";
+            display: inline-block;
+            margin-left: 2px;
+            margin-bottom: 2px;
+            line-height: 1;
+            width: 10px;
+            height: 10px;
+            border: 2px solid blue;
+            box-sizing: border-box;
+        }
+        .hide {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<div id="tree" style="width: 300px;background-color: #eee"></div>
+<label>
+    <input type="checkbox" class="radio hide">
+    <span class="radio-box radio-box-half"></span>半选和全选样式
+</label>
+<script src="js/jquery-3.2.1.js"></script>
+<script>
+    var $tree = $('#tree');
+    var tree = [
+        {
+            id: 0,
+            text: "grandPa",
+            color: "#2c3cee",
+            backgroundColor: "#90aaa8",
+            icon:"",
+            selectIcon:"",
+            state: {
+                checked: false,
+                childCheck: true,
+                open: true,
+                wrap: true,
+            },
+            nodes: [
+            {
+                id: 1,
+                text: "Parent 1",
+                color: "#2c3cee",
+                backgroundColor: "#90aaa8",
+                icon:"",
+                selectIcon:"",
+                state: {
+                    checked: false,
+                    childCheck: true,
+                    open: true,
+                    wrap: true,
+                },
+                nodes: [
+                    {
+                        id: 11,
+                        text: "Child 1",
+                        color: "#2c3cee",
+                        backgroundColor: "#90aaa8",
+                        icon:"",
+                        selectIcon:"",
+                        state: {
+                            checked: false,
+                            childCheck: true,
+                            open: true,
+                            wrap: true,
+                        },
+                        nodes: [
+                            {
+                                id: 111,
+                                text: "Grandchild 11",
+                                color: "#2c3cee",
+                                backgroundColor: "#90aaa8",
+                                icon:"",
+                                selectIcon:"",
+                                state: {
+                                    checked: false,
+                                    childCheck: false,
+                                    open: true,
+                                    wrap: false,
+                                },
+                            },
+                            {
+                                id: 112,
+                                text: "Grandchild 12",
+                                color: "#2c3cee",
+                                backgroundColor: "#90aaa8",
+                                icon:"",
+                                selectIcon:"",
+                                state: {
+                                    checked: true,
+                                    childCheck: false,
+                                    open: true,
+                                    wrap: false,
+                                },
+                            }
+                        ]
+                    },
+                    {
+                        id: 12,
+                        text: "Child 2",
+                        color: "#2c3cee",
+                        backgroundColor: "#90aaa8",
+                        icon:"",
+                        selectIcon:"",
+                        state: {
+                            checked: true,
+                            childCheck: true,
+                            open: true,
+                            wrap: true,
+                        },
+                        nodes: [
+                            {
+                                id: 121,
+                                text: "Grandchild 21",
+                                color: "#2c3cee",
+                                backgroundColor: "#90aaa8",
+                                icon:"",
+                                selectIcon:"",
+                                state: {
+                                    checked: true,
+                                    childCheck: false,
+                                    open: true,
+                                    wrap: false,
+                                },
+                            },
+                            {
+                                id: 122,
+                                text: "Grandchild 22",
+                                color: "#2c3cee",
+                                backgroundColor: "#90aaa8",
+                                icon:"",
+                                selectIcon:"",
+                                state: {
+                                    checked: true,
+                                    childCheck: true,
+                                    open: true,
+                                    wrap: true,
+                                },
+                                nodes: [
+                                    {
+                                        id: 1221,
+                                        text: "Grandchild 221",
+                                        color: "#2c3cee",
+                                        backgroundColor: "#90aaa8",
+                                        icon:"",
+                                        selectIcon:"",
+                                        state: {
+                                            checked: true,
+                                            childCheck: false,
+                                            open: true,
+                                            wrap: false,
+                                        },
+                                    },
+                                    {
+                                        id: 1222,
+                                        text: "Grandchild 222",
+                                        color: "#2c3cee",
+                                        backgroundColor: "#90aaa8",
+                                        icon:"",
+                                        selectIcon:"",
+                                        state: {
+                                            checked: true,
+                                            childCheck: false,
+                                            open: true,
+                                            wrap: false,
+                                        },
+                                    }
+                                ]
+                            },
+                            {
+                                id: 123,
+                                text: "Grandchild 23",
+                                color: "#2c3cee",
+                                backgroundColor: "#90aaa8",
+                                icon:"",
+                                selectIcon:"",
+                                state: {
+                                    checked: true,
+                                    childCheck: false,
+                                    open: true,
+                                    wrap: false,
+                                },
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 2,
+                text: "Parent 2",
+                color: "#2c3cee",
+                backgroundColor: "#90aaa8",
+                icon:"",
+                selectIcon:"",
+                state: {
+                    checked: true,
+                    childCheck: false,
+                    open: true,
+                    wrap: false,
+                },
+            },
+            {
+                id: 3,
+                text: "Parent 3",
+                color: "#2c3cee",
+                backgroundColor: "#90aaa8",
+                icon:"",
+                selectIcon:"",
+                state: {
+                    checked: true,
+                    childCheck: false,
+                    open: true,
+                    wrap: false,
+                },
+            },
+        ]
+    }];
+
+    initTree();
+    $tree.click(function (e) {
+        if(e.target.nodeName.toLocaleLowerCase() === "input"){//点击checkbox
+            var $parent = $(e.target).parent();
+            var id = $parent.attr("data-id");
+            tree.forEach(function (child) {
+                setDataCheckById(child,id,false,true);
+            });
+            setDataChildCheckById(tree[0],id);
+            initTree();
+        }else if(e.target.nodeName.toLocaleLowerCase() === "span" ){//点击展开按钮
+            var $parent = $(e.target).parent();
+            var id = $parent.attr("data-id");
+            setDataById(tree[0],id,"open","toggle");
+            initTree();
+        } else{
+            console.log(e.target);
+        }
+    })
+    function initTree() {//刷新DOM
+        $tree.empty();
+        tree.forEach( function (el, index) {
+            rendDomNode($tree,el);
+        });
+    };
+    function rendDomNode ($parentDom, el, layer=0) {
+        var check = el.state.checked ? 'checked':'';
+        var checkStyle;
+        if (el.state.checked){
+            checkStyle = 'checked';
+        }else if (el.state.childCheck){
+            checkStyle = 'halfCheck';
+        }else {
+            checkStyle = '';
+        }
+        var openBtn = "";
+        if(el.state.wrap){//可以展开
+            if(el.state.open){//已经展开
+                openBtn = "-";
+            }else{//未展开
+                openBtn = "+";
+            }
+        }
+        if(!layer){//根节点
+            var template = '<ul data-id="'+ el.id +'"><span class="indent" style="width:'+15*(layer+1)+'px;">'+ openBtn+'</span><input type="checkbox" '+ check +' class="'+checkStyle+'"/>'+ el.text + '</ul>';
+//            var template = `
+//                <ul>
+//                <label>
+//                    <input type="checkbox" class="radio hide">
+//                    <span class="radio-box radio-box-half"></span>asd
+//                </label>
+//                </ul>
+//            `;
+        }else{
+            var template = '<li data-id="'+ el.id +'"><span class="indent" style="width:'+24*layer+'px;">'+ openBtn+'</span><input type="checkbox" '+ check +' class="'+checkStyle+'"/>'+ el.text + '</li>';
+        }
+        $parentDom.append(template);
+
+        if(el.state.wrap){//可以展开
+            if(el.state.open){//已经展开
+                if(el.nodes){//渲染子元素
+                    layer++;
+                    el.nodes.forEach(function (child) {
+                        rendDomNode( $("#tree").children(), child ,layer );
+                    });
+                }
+            }
+        }
+    }
+    //TODO: 半选有bug；前提：一二三级全不选；操作：触发三级全选；理想：一二级半选；结果：一级不变为半选
+    function setDataChildCheckById (el, id) {
+        let childCheckCount = 0;
+        if(parseInt(el.id) === parseInt(id)){//递归找到id的子节点
+            el.state.childCheck = el.state.checked;
+            return el.state.checked?1:0;//目标节点是否被选取
+        }
+        else {//依据id非该节点，递归其子序列
+            if( el.nodes ){//递归子元素
+                el.nodes.forEach(function (child) {
+                    let temp = setDataChildCheckById(child,id);
+                    if(temp>0){
+                        childCheckCount+=temp;
+                    }
+                });
+                //当前元素所有子元素已经判断完，更改自身状态并返回给父递归状态
+                if(childCheckCount === el.nodes.length){//所有子元素全选
+                    el.state.checked = true;
+                    return 1;
+                }else if(childCheckCount > 0){//不是所有子元素全选
+                    el.state.checked = false;
+                    el.state.childCheck = true;
+                    return 0.5;
+                }else {//所有子元素不选
+                    el.state.checked = false;
+                    el.state.childCheck = false;
+                    return 0;
+                }
+            }else {//无子元素
+                return el.state.checked?1:0;
+            }
+        }
+    }
+
+    function setDataCheckById(el,id,found,check) {
+        if ( found ){//父已经匹配上,子节点跟随父节点的check状态
+            el.state.checked = check;
+            el.state.childCheck = check;
+        }else {//父未匹配上
+            if(parseInt(el.id) === parseInt(id)){//是当前节点
+                check = !el.state.checked;
+                el.state.checked = check;//更改当前节点状态
+                found = true;
+            }
+        }
+        //递归子元素
+        if( el.nodes ){
+            el.nodes.forEach(function (child) {
+                setDataCheckById(child,id,found,check);
+            })
+        }
+    }
+    function setDataById(el,id,stateProperty,value){
+        if(parseInt(el.id) === parseInt(id)){//是当前节点
+            if(value === "toggle"){
+                el.state[stateProperty] = !el.state[stateProperty];
+            }else{
+                el.state[stateProperty] = value;
+            }
+            return;
+        }
+        //递归子元素
+        if( el.nodes ){
+            el.nodes.forEach(function (child) {
+                setDataById(child,id,stateProperty,value);
+            })
+        }else{
+            return;
+        }
+    }
+
+</script>
+</body>
+</html>
