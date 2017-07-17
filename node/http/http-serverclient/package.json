@@ -1,0 +1,5 @@
+{
+	"name": "http-severclient",
+	"description": "An Http client that connect to a server",
+	"version": "1.0.0"
+}

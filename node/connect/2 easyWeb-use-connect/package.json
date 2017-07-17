@@ -1,0 +1,8 @@
+{
+  "name": "my-website2",
+  "description": "simple web by connect",
+  "version": "1.0.0",
+  "dependencies": {
+    "connect": "^3.6.2"
+  }
+}
