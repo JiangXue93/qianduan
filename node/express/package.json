@@ -1,0 +1,16 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "my first express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+  		"express": "2.5.9",
+  		"ejs": "0.4.2",
+  		"superagent": "0.3.0"
+  },
+  "license": "ISC"
+}
