@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form span { display: inline-block; width: 30%; color:black; background: white; padding: 10px;text-align: center;line-height: 1;font-size: 16px;vertical-align: bottom;}
+      form span:hover::after {
+          content: "点击换名";
+          display: block;
+          position: absolute;
+          top: -30px;
+          width: 15%;
+          left:0;
+          border:2px solid #Fc4;
+          padding: 5px;
+      }
+      form span:hover::before {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 0px;
+          left:15%;
+          border-top: 6px solid #Fc4;
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          border-bottom: 6px solid transparent;  
+      }
+      form input { border: 0; padding: 10px; width: 60%; margin-right: .5%;}
+      form button { width: 8%; background: rgb(130, 224, 255); border: none; padding: 10px;}
+      .mask {position: absolute; top: 0;left: 0;right: 0;bottom: 0;background-color: rgba(200,200,200,.5);display: none;}
+      .mask-body { background: #000; padding: 3px; position: fixed; bottom: 50px; width: 100%; }
+      .mask-body input { border: 0; padding: 10px; width: 90%; margin-right: .5%;}
+      .mask-body button{ width: 8%; background: rgb(130, 224, 255); border: none; padding: 10px;}
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+      .broadcast {color: red;}
+    </style>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <form action="">
+      <span id="nickname">匿名</span>
+      <input id="m" autocomplete="off"/><button>Send</button>
+    </form>
+    <div class="mask">
+      <div class="mask-body">
+        <input id="name" placeholder="input new nickname"/><button>Yes</button>
+      </div>
+    </div>
+    
+    <script src="./socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+   $(function () {
+    var socket = io();//不写地址默认连接自身服务器
+    $('form').submit(function(){
+      socket.emit('chat message', $('#m').val());
+      $('#m').val('');
+      return false;
+    });
+    //名字修改弹出层
+    $('.mask').click(function (e) {
+      if(this === e.target){
+        $(this).hide();
+      }else if(e.target.tagName.toLowerCase() === 'button'){
+        $(this).hide();
+        socket.emit('change name', $('#name').val());
+        $('#name').val("");
+      }   
+    });
+    $('#nickname').click(function () {
+      $(".mask").show();
+    });
+
+    socket.on('chat message', function (msg){
+      var message = JSON.parse(msg);
+      $('#messages').prepend($('<li>').text(message.nickname + " : " + message.msg).css("backgroundColor",message.color));
+    });
+
+    socket.on('change name', function (msg) {
+      $('#nickname').html(msg);
+    });
+
+    socket.on('broadcast', function (msg) {
+      $('#messages').prepend($('<li>').text(msg).addClass("broadcast"));
+    })
+  });
+  </script>
+  </body>
+</html>
