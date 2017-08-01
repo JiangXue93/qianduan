@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test ajax</title>
+	<style>
+	.select {
+		width: 150px;
+		display: inline-block;
+		height: 250px;
+		border: 1px solid black;
+		vertical-align: top;
+		overflow-y: auto; 
+		user-select: none;
+		-moz-user-select:none;
+		border-radius: 2px;
+	}
+	.option:hover {
+		background: #eff;
+		cursor: pointer;
+	}
+	.select .chosed {
+		display: none;
+	}
+	.select .select-group {
+		background: #eee;
+	}
+	.select .select-group:hover {
+		cursor: default;
+	}
+	.search-target{
+		background-color: #ee0;
+	}
+	</style>
+</head>
+<body>
+	<div class="select-wrap">
+		<div>
+			<input type="text" name="search" class="search">
+		</div>
+		<div class="select select-box">
+			<div class="option">1</div>
+			<div class="option">2</div>
+		</div>
+		<div class="select selected"></div>
+	</div>
+	<script src="./js/jquery-3.2.1.js"></script>
+	<script src="./js/jOptionx.js"></script>
+	<script>
+		var mydata = {
+					'#':['1asdas','2adsa'],
+					'A':['Agular','Ali'],
+					'B':['Baicai','Byebye','black'],
+					'C':['Caoyuan','Cat','Cow']
+					};
+		$('.select-wrap').jOptionx('.select-box','.selected',mydata);
+		$('.select-wrap').jOptionx('.select-box','.selected');//默认值
+	</script>
+</body>
