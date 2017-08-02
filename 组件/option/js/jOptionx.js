@@ -1,10 +1,11 @@
 (function($){
 	$.fn.extend({
-		"jOptionx": function (selectbx, selected, input) {
+		"jOptionx": function (selectbx, selected,input) {
 			var data = [$.extend({},dataFormat(defaults),dataFormat(input))][0];
 			return this.each( function () {//返回jq对象
 				init (selectbx,selected,data);
-
+				$('<input type="text" class="result"/>').insertAfter('.search');
+				// $('.result').hide();//隐藏用于记录结果
 				$('.search').keyup(function (e) {
 					init(selectbx, selected, data);
 				});
@@ -17,6 +18,7 @@
 					'B':['Baicai','Byebye','black'],
 					'C':['Caoyuan','Cat','Cow']
 					};
+	var results = {};
 	function say(data){
 		console.log(data);
 	}
@@ -24,23 +26,25 @@
 	function init (selectbx,selected,data) {
 		$(selectbx).empty();
 		$(selected).empty();
+		$('.result').val("");
+		results = {};
 		render(selectbx,selected,data);
 
 		$('.option').dblclick(function (e) {
 			var target = $(e.target);
-			// say(e);
 			var id = target.attr('data-id');
-			// say(target.attr('data-id'));
 			togle(id, 'chosed', data);
-			
 			init(selectbx,selected,data);
+			console.log(results);
 		});
+		
 		
 	}
 	//绘dom
 	function render (selectbx,selected,data) {
 		var $selectbx = $(selectbx);
 		var $selected = $(selected);
+		var $result = $('.result');
 		// say(data);
 		for(var el in data) {
 			var templateGroup = '<div class="option select-group">' + el + '</div>',
@@ -48,6 +52,8 @@
 				templateSel = '',
 				count = 0;
 			var search = $('.search').val().toLowerCase();
+
+			results[el] = [];
 
 			data[el].forEach( function (e) {
 				var chosed = e.chosed ? ' chosed':'';
@@ -64,9 +70,18 @@
 
 
 				if (e.chosed) {//计算选中个数，用于类别标签的展示
+					var result = $result.val();
 					templateSel += '<div class="option" data-id="'+e.id+'">'+e.value+'</div>';
-					count++;//
-				}
+					count++;
+					//记录结果
+					if(!result){
+						$result.val(e.id + "");
+					}else{
+						var temp = result+" "+e.id
+						$result.val(temp); 
+					}
+					results[el].push(e.value);							
+				}		
 			});
 
 			if(count != data[el].length){//非所有被选中，渲染类别标签
