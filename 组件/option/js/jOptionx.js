@@ -5,7 +5,7 @@
 			return this.each( function () {//返回jq对象
 				init (selectbx,selected,data);
 				$('<input type="text" class="result"/>').insertAfter('.search');
-				// $('.result').hide();//隐藏用于记录结果
+				$('.result').hide();//隐藏用于记录结果
 				$('.search').keyup(function (e) {
 					init(selectbx, selected, data);
 				});
@@ -13,12 +13,17 @@
 		}
 	});
 
+	
 	var defaults = {
 					'A':['Agular','Ali'],
 					'B':['Baicai','Byebye','black'],
 					'C':['Caoyuan','Cat','Cow']
 					};
 	var results = {};
+
+	$.fn.getResults = function () {
+		return results;
+	}
 	function say(data){
 		console.log(data);
 	}
@@ -35,10 +40,8 @@
 			var id = target.attr('data-id');
 			togle(id, 'chosed', data);
 			init(selectbx,selected,data);
-			console.log(results);
+			// console.log(results);
 		});
-		
-		
 	}
 	//绘dom
 	function render (selectbx,selected,data) {

@@ -43,6 +43,7 @@
 			<div class="option">2</div>
 		</div>
 		<div class="select selected"></div>
+		<button class="submit">results</button>
 	</div>
 	<script src="./js/jquery-3.2.1.js"></script>
 	<script src="./js/jOptionx.js"></script>
@@ -53,7 +54,12 @@
 					'B':['Baicai','Byebye','black'],
 					'C':['Caoyuan','Cat','Cow']
 					};
-		$('.select-wrap').jOptionx('.select-box','.selected',mydata);
+		var jOx = $('.select-wrap').jOptionx('.select-box','.selected',mydata);
+		
+		$('.submit').click(function () {
+			console.log(jOx.getResults());
+		})
+
 		// $('.select-wrap').jOptionx('.select-box','.selected');//默认值
 	</script>
 </body>
