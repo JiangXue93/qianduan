@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jtree</title>
+	<style>
+		* {
+            --font-size: 20px;
+            --height: 20px;
+            padding: 0;
+            margin: 0;
+        }
+        .jThreex-li{
+            list-style: none;
+            padding: 3px;
+        }
+        .jThreex-indent{
+            display: inline-block;
+            height: var(--height);
+            line-height: 1;
+            vertical-align: middle;
+            text-align: right;
+            font-size: var(--height);
+            margin-right: 5px;
+        }
+        .jThreex-indent:not(:empty):hover{
+        	cursor: pointer;
+        }
+        .jthreex-halfCheck::after {
+            content: '';
+            display: inline-block;
+            width: 50%;
+            height: 50%;
+            background-color: #313131;
+            line-height: 1;
+            margin-top:20%;
+            margin-left: 20%;
+            border-radius: 2px;
+        }
+        .jthreex-checkbox {
+            display: inline-block;
+            height: var(--height);
+            width: var(--height);
+            vertical-align: bottom;
+        }
+        .jthreex-checkbox:hover {
+            cursor: pointer;
+        }
+        .jThreex-search {
+        	width: 90%;
+        	margin: 0px auto;
+        	display: block; 
+        }
+        /*容器样式*/
+		#demo1 {
+			background-color: #02aaff;
+			padding: 10px;
+		}
+		#demo2 {
+			background-color: #02ffaa;
+			padding: 10px;
+			width: 400px;
+			height: 300px;
+			overflow: auto;
+		}
+	</style>
+</head>
+<body>
+	<div id="demo1"><!-- 原始数据容器 --></div>
+	<div id="demo2"><!-- 自定义数据容器 --></div>
+	<script src="./js/jquery-3.2.1.js"></script>
+    <script src="./js/jtree.js"></script>
+	<script>
+		var myData = [{
+            id: 0,//数字id
+            text: "食材",
+            color: "#2c3cee",//无用参数
+            backgroundColor: "#90aaa8",//无用参数
+            icon:"",//无用参数
+            selectIcon:"",//无用参数
+            state: {
+                checked: false,//选择状态
+                childCheck: true,
+                open: true,//是否处于展开
+                wrap: true,//有子节点可展开
+                search: true,//查询命中(初始化为true便于第一次渲染)
+            },
+            nodes: [//子节点
+                {
+                    id: 1,
+                    text: "123",
+                    color: "#2c3cee",
+                    backgroundColor: "#90aaa8",
+                    icon:"",
+                    selectIcon:"",
+                    state: {
+                        checked: false,
+                        childCheck: true,
+                        open: true,
+                        wrap: true,
+                        search: true,
+                    },
+                    nodes: [
+                        {
+                            id: 11,
+                            text: "233",
+                            color: "#2c3cee",
+                            backgroundColor: "#90aaa8",
+                            icon:"",
+                            selectIcon:"",
+                            state: {
+                                checked: false,
+                                childCheck: true,
+                                open: true,
+                                wrap: true,
+                                search: true,
+                            },
+                            nodes: [
+                                {
+                                    id: 111,
+                                    text: "鸡",
+                                    color: "#2c3cee",
+                                    backgroundColor: "#90aaa8",
+                                    icon:"",
+                                    selectIcon:"",
+                                    state: {
+                                        checked: false,
+                                        childCheck: false,
+                                        open: true,
+                                        wrap: false,
+                                        search: true,
+                                    },
+                                },
+                                {
+                                    id: 112,
+                                    text: "鸭",
+                                    color: "#2c3cee",
+                                    backgroundColor: "#90aaa8",
+                                    icon:"",
+                                    selectIcon:"",
+                                    state: {
+                                        checked: true,
+                                        childCheck: false,
+                                        open: true,
+                                        wrap: false,
+                                        search: true,
+                                    },
+                                }
+                            ]
+                        },
+                        {
+                            id: 12,
+                            text: "游的",
+                            color: "#2c3cee",
+                            backgroundColor: "#90aaa8",
+                            icon:"",
+                            selectIcon:"",
+                            state: {
+                                checked: true,
+                                childCheck: true,
+                                open: true,
+                                wrap: true,
+                                search: true,
+                            },
+                            nodes: [
+                                {
+                                    id: 121,
+                                    text: "海里的",
+                                    color: "#2c3cee",
+                                    backgroundColor: "#90aaa8",
+                                    icon:"",
+                                    selectIcon:"",
+                                    state: {
+                                        checked: true,
+                                        childCheck: false,
+                                        open: true,
+                                        wrap: false,
+                                        search: true,
+                                    },
+                                },
+                                {
+                                    id: 122,
+                                    text: "河里的",
+                                    color: "#2c3cee",
+                                    backgroundColor: "#90aaa8",
+                                    icon:"",
+                                    selectIcon:"",
+                                    state: {
+                                        checked: true,
+                                        childCheck: true,
+                                        open: true,
+                                        wrap: true,
+                                        search: true,
+                                    },
+                                    nodes: [
+                                        {
+                                            id: 1221,
+                                            text: "草鱼",
+                                            color: "#2c3cee",
+                                            backgroundColor: "#90aaa8",
+                                            icon:"",
+                                            selectIcon:"",
+                                            state: {
+                                                checked: true,
+                                                childCheck: false,
+                                                open: true,
+                                                wrap: false,
+                                                search: true,
+                                            },
+                                        },
+                                        {
+                                            id: 1222,
+                                            text: "鲶鱼",
+                                            color: "#2c3cee",
+                                            backgroundColor: "#90aaa8",
+                                            icon:"",
+                                            selectIcon:"",
+                                            state: {
+                                                checked: true,
+                                                childCheck: false,
+                                                open: true,
+                                                wrap: false,
+                                                search: true,
+                                            },
+                                        }
+                                    ]
+                                },
+                                {
+                                    id: 123,
+                                    text: "池塘里的",
+                                    color: "#2c3cee",
+                                    backgroundColor: "#90aaa8",
+                                    icon:"",
+                                    selectIcon:"",
+                                    state: {
+                                        checked: true,
+                                        childCheck: false,
+                                        open: true,
+                                        wrap: false,
+                                        search: true,
+                                    },
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    text: "菜",
+                    color: "#2c3cee",
+                    backgroundColor: "#90aaa8",
+                    icon:"",
+                    selectIcon:"",
+                    state: {
+                        checked: false,
+                        childCheck: false,
+                        open: true,
+                        wrap: false,
+                        search: true,
+                    },
+                },
+
+            ]
+        	}];
+		
+		var jt1 = $('#demo1').jtree();//返回值为所有默认数据
+		var jt2 = $('#demo2').jtree(myData);//返回值为所有自定义数据
+		// $('#demo1').click(function () {
+		// 	console.log(jt1.data[0][0].nodes[0].nodes[0].nodes[0]);//输出数据
+		// 	console.log(jt1.data[0][0].nodes[0].nodes[0].nodes[0].state.checked);
+		// });
+		console.log(jt1);
+		console.log(jt2);
+	</script>
+</body>
+</html>
