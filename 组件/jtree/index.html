@@ -65,11 +65,16 @@
 			height: 300px;
 			overflow: auto;
 		}
+        #demo3 {
+            background-color: #aaaaff;
+            padding: 10px;
+        }
 	</style>
 </head>
 <body>
 	<div id="demo1"><!-- 原始数据容器 --></div>
 	<div id="demo2"><!-- 自定义数据容器 --></div>
+    <div id="demo3"><!-- 自定义数据容器 --></div>
 	<script src="./js/jquery-3.2.1.js"></script>
     <script src="./js/jtree.js"></script>
 	<script>
@@ -267,12 +272,27 @@
 		
 		var jt1 = $('#demo1').jtree();//返回值为所有默认数据
 		var jt2 = $('#demo2').jtree(myData);//返回值为所有自定义数据
-		// $('#demo1').click(function () {
-		// 	console.log(jt1.data[0][0].nodes[0].nodes[0].nodes[0]);//输出数据
-		// 	console.log(jt1.data[0][0].nodes[0].nodes[0].nodes[0].state.checked);
-		// });
 		console.log(jt1);
 		console.log(jt2);
+        var selfData = {
+                        id:0,
+                        text:"全选",
+                        nodes:[
+                                {
+                                    id: 11,
+                                    text: "child1" ,
+                                    nodes:[{id:111,text:"grandchild"}]
+                                },
+                                {
+                                    id: 12,
+                                    text: "child2", 
+                                    nodes:[
+                                        {id:121,text:"grandchild121"},
+                                        {id:122,text:"grandchild121"}]
+                                }
+                              ]
+                    };
+        var jt3 = $('#demo3').jtree(selfData);
 	</script>
 </body>
 </html>

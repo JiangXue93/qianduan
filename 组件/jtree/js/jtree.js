@@ -5,7 +5,7 @@
 (function ($) {
 	$.fn.extend({
 		'jtree': function (option) {
-			var data = [$.extend({}, defaluts, option)];
+			var data = [$.extend({}, defaluts, option && option.constructor === Array ? dataFormat(option) : dataFormat([option]))];
 			// console.log(data);
 			var jt = new JT(this, data);
 			this.append('<input type="text" class="jThreex-search" placeholder="search">')
@@ -425,5 +425,56 @@
 	            return false;
 	        }  
 	    }
+	    //数据新装
+	    this.dataFormat = function (data) {
+	    	$this = this;
+	    	var target = data.constructor === Array ? [] : {};
+
+	    	if(data.constructor === Array){//
+	    		for(var i in data) {
+	    			target[i] = $this.dataFormat(data[i]);
+	    		}
+	    	}else if(typeof data === 'object'){
+	    		target.state = {
+	    			checked: false,//选择状态（全选状态）
+                	childCheck: false,//半选状态（孙子元素被选状态）
+                	open: true,//是否处于展开状态
+                	wrap: !!data.nodes,//是否有子节点，可展开
+                	search: true,//查询命中状态(初始化为true便于第一次渲染)
+	    		}
+	    		for(var i in data) {
+	    			target[i] = $this.dataFormat(data[i]);
+	    		}
+	    	}
+
+	    	return target;
+	    }
+	}
+	//数据格式化（深拷贝）
+	function dataFormat (data) {
+		
+		if(typeof data != 'object'){
+			return;
+		}
+		var target = data.constructor === Array ? [] : {};
+
+    	if(data.constructor === Array){
+    		for(var i in data) {
+    			target[i] = dataFormat(data[i]);
+    		}
+    	}else if(typeof data === 'object'){
+    		target.state = {
+				    			checked: false,//选择状态（全选状态）
+				            	childCheck: false,//半选状态（孙子元素被选状态）
+				            	open: true,//是否处于展开状态
+				            	wrap: !!data.nodes,//是否有子节点，可展开
+				            	search: true,//查询命中状态(初始化为true便于第一次渲染)
+				    		};
+    		for(var i in data) {
+    			target[i] = typeof data[i] === 'object' ? dataFormat(data[i]): data[i];
+    		}
+    	}
+
+	    return target;
 	}
 })(jQuery);
